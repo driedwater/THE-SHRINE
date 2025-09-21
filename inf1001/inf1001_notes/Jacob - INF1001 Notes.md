@@ -48,9 +48,10 @@ Note: When refering to info size, kilo is 1024. When refering to speeds e.g. sam
 - MSB = Most significant bit i.e. bit representing largest value
 - LSB = Least significant bit i.e. the ones bit
 
-0000 0000  
-^---------^  
-MSB----LSB
+|  0|0|0|0|0|0|0|0  | 
+|:-:|-|-|-|-|-|-|:-:| 
+|  ^|-|-|-|-|-|-|^  |  
+|MSB|-|-|-|-|-|-|LSB|
 
 ## Analogue to Digial Signal
 
@@ -62,9 +63,9 @@ Sampling vs quantization
 
 Nyquist Rate
 - Sampling frequency must be more than 2x max frequency of input.
-- f(sample) > 2x f(input)
-- f(sample) cannot be equals to 2x f(input).
-- If unlucky and f(sample)=2xf(input), possible to only sample the 0 value of the wave
+- $f(sample) > 2 * f(input)$
+- $f(sample)$ **cannot be equals to** $2 * f(input)$.
+- If unlucky and $f(sample) = 2 * f(input)$, possible to only sample the 0 value of the wave
 
 > Sampling rates
 >> 1s = 1Hz  
@@ -86,7 +87,7 @@ Usually 8, 10, 12, 16, 24
 ## Positional Number systems
 
 Decimal binary hexadecimal are positional number systems
-the position of each digit determines and represents a diffrent power of 10, 2 or 8
+the position of each digit determines and represents a diffrent power of 10, 2 or 8  
 You maybe able to determin which number system is being used based on which digits are present.
 e.g.
 - 90FE is cnfm hex
@@ -105,14 +106,17 @@ $1011.11 = 1*2^3 + 1*2^1 + 1*2^0 + 1*2^{-1} + 1*2^{-2}$
 Sign-magnitude representation
 - just means num is signed. does not tell you HOW it's signed
 
-n=bit sign-magnitude binary can rep values from -(2^n-1^-1) to +(2^n-1^-1)  
+n-bit sign-magnitude binary can rep values from $-(2^{n-1}-1)$ to $+(2^{n-1}-1)$  
 e.g. 8 bit binary therefore can store up to 7 bit of value  
-i.e. 127 +ve and -ve
+i.e. 127 +ve and -ve  
 also results in a +ve 0 and -ve 0 representation
 
 1's complement is the WEIRD way to sign and is not used in computers  
-the compleement of a binary digit is the invers of all the digits.  
-i.e 010 for 2 then 101 is -2  
+- the compleement of a binary digit is the invers of all the digits.  
+- i.e
+- 010 for 2
+- then 101 is -2
+
 still uses MSB to rep +ve and -ve numbers, 0 = +ve, 1 = -ve  
 1's complement more easy to use in circuits as you just NOT gate each binary digit.  
 to derive -ve number for 1's complement, find +ve value first, then invert all bits
@@ -121,7 +125,8 @@ to derive -ve number for 1's complement, find +ve value first, then invert all b
 - take the +ve value and invert bit like 1s complement
 - add 1
 - finish
-changes value range to -2^n-1^ to +(2^n-1^-1)
+
+changes value range to -2^n-1^ to +(2^n-1^-1)  
 removes -0 representation
 
 ## addition, sub traction and overflow
@@ -139,7 +144,7 @@ so you change carry flag to 1
 but since MSB is still negative, logic is correct so overflow flag is still 0
 _____________
 
-$$10001_2 + 1010_2 = [1]0011_2$$
+$$1001_2 + 1010_2 = [1]0011_2$$
 
 ^ in this case also run out of bits.  
 so you change carry flag to 1.  
@@ -147,20 +152,37 @@ since MSB is 0 but both initial values MSB was 1, logic has failed as output is 
 Thus, overflow flag must be changed to 1
 ______________
 
-$$[1]0011_2 - 0110_2 = 1101_2$$
+|       |$^2->^1$|$^2$|   |   |
+|:-----:|:------:|----| - | - |
+|~~[1]~~|    0   | 0  | 1 | 1 |
+|   -   |    0   | 1  | 1 | 0 |
+|       |    1   | 1  | 0 | 1 |
+
 ^ borrow imiginary bit, 3-6 = -3 so logic ok, no overflow  
 
 
-$$[1]0110_2 - 0011_2 = 0011_2$$
-^ borrow imiginary bit, 6-3 = 3 so logic ok, no overflow
 
-$$[1]1010_2 - 00011_2 = 0111_2$$
-  ????????????????
+|       |   |     | $^2$|$^2$|
+|:-----:|---|-----|  -  | -  |
+|       | 0 |~~1~~|~~1~~| 0  |
+|   -   | 0 |  0  |  1  | 1  |
+|       | 0 |  0  |  1  | 1  |
+
+^ 6-3 = 3 so logic ok, no overflow
 
 
-if number is positive, can extend leading bits with 0
-e.g. 0011 = 0000 0011
-if number is negative, can extend leading bits with 1
+|       |     |$^2->^1$| $^2$|$^2$|
+|:-----:|:---:|:------:|  -  | -  |
+|       |~~1~~|    0   |~~1~~| 0  |
+|   -   |  0  |    0   |  1  | 1  |
+|       |  0  |    1   |  1  | 1  |
+  
+^^ -6-3 = 7, logic fail, overflow
+
+
+if number is positive, can extend leading bits with 0  
+e.g. 0011 = 0000 0011  
+if number is negative, can extend leading bits with 1  
 e.g. 1001 = 1111 1001
 
 ## IEEE-754 Mantissa
@@ -171,9 +193,12 @@ $$(-1)^{sign} * 1.mantissa *2^{(exponent-127)}$$
 $25.75$ to IEEE-754  
 split decimal into whole num and fractional  
 whole: 25, fractional: 0.75  
-Find binary equivalent of fractional part $$ 0.75*2 = 1.5 \ \ \ -> (1)$$ $$ 0.5*2 = 1.0 \ \ \ -> (1)$$  
+Find binary equivalent of fractional part
+$$ 0.75*2 = 1.5 \ \ \ -> (1)$$
+$$ 0.5*2 = 1.0 \ \ \ -> (1)$$  
 binary equivalent: $11001.11_2$  
-move binary point to the **left** until you get $1.matissa$ $$11001.11 -> 1.100111$$  
+move binary point to the **left** until you get $1.matissa$
+$$11001.11 -> 1.100111$$  
 Note: Moved to left (4) times, this will be the Exponent  
 
 - Sign: is +ve so sign = 0  
@@ -187,7 +212,9 @@ _______
 $.75$ to IEEE-754  
 split decimal into whole num and fractional  
 whole: 0, fractional: 0.75  
-Find binary equivalent of fractional part $$ 0.75*2 = 1.5\ \ \ -> (1)$$ $$ 0.5*2 = 1.0\ \ \ \ -> (1) $$  
+Find binary equivalent of fractional part
+$$ 0.75*2 = 1.5\ \ \ -> (1)$$
+$$ 0.5*2 = 1.0\ \ \ -> (1)$$  
 binary equivalent: $0.11_2$  
 move binary point to the **right** until you get $1.mantissa$  
 $0.11 -> 1.1$  
@@ -197,7 +224,8 @@ Note Moved to right (1) times, This will be the exponent
 - Exponent : -1 = exp+127 => 126 = 10000011  
 
 NOTE: Exponent is unsigned.  
-Exponent is how many times you shift the binary point to the left, in this case moved right so is -1 and change exponent bias 127 to +
+Exponent is how many times you shift the binary point to the left,  
+in this case moved right so is -1 and change exponent bias 127 to +
 
 ## Gray code
 
@@ -225,8 +253,8 @@ Parity type is agreed between users before sending data
 if error detected, parity cannot recover the data.
 Parity can be added as LSB or MSB, depend on user agreement
 
-Even: 1011 011[1]
-Odd : 1011 011[0]
+Even: 1011 011[1] -> sum of 1's= 6  
+Odd : 1011 011[0] -> sum of 1's= 5
 
 Other error detection: Cyclic redundancy check (CRC), Hamming code
 
@@ -290,7 +318,7 @@ $Z_{NOR} = \bar{A + B} =$
 Commutativity (flip inputs does not change outcome): x.y = y.x, x+y = y+x
 Associativity (grouping operations does not change outcome): (x.y).z = x.(y.z), (x+y)+z = x+(y+z)
 Distributivity ()
-
+?????????????????????
 
 
 # tut1
@@ -299,123 +327,138 @@ Distributivity ()
 find last instance of 1, all 0 right of last instance of 1 remain as 0, flip all bits left of last instance 1 except MSB
 
 e.g.:
-1010 0100
-[1]010 0[1]00
-[1]101 1[1]00 [end]
+|-|-|-|-|-|-|-|-|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|1|0|1|0|0|1|0|0|
+|[1]|0|1|0|0|[1]|0|0|
+|[1]|1|0|1|1|[1]|0|0| -- end
 
 q1a
 
-2v/8 setp cus 2^3
+$\frac{2v}{8}$ step cus $2^3$
 
 0, 0.5, 1.5, 1.75, 1.75
 
-never hits max 2v.
-because need to keeep 000 for 0V, no choice have to give up 2v
+never hits max 2v.  
+because need to keep 000 for 0V, no choice have to give up 2v  
 considered boundary case
 
 error
 0.001, 0.011, 0.068, 0.053, 0.146
 
-standard choice: Vmax/2^n
-if req to include Vmax: Vmax/(2^n -1)
+standard choice: $\frac{Vmax}{2^n}$  
+if req to include Vmax: $\frac{Vmax}{(2^n -1)}$  
 other possibility: 000 = midpoint of step between (0 and 0.25)
 
 q1b
 
 sum all absolute / num samples
 
-max error is (v/2^n)/2 as max error is when voltage is exactly in middle of diff between step values
+max error is $\frac{(v/2^n)}{2}$ as max error is when voltage is exactly in middle of diff between step values
 
 q1c
 
-(2Volts/2^10) /2 = 0.97mV
+$\frac{(Vmax/2^10)}{2} = \frac{(2/2^10)}{2} = 0.97mV$
 
-q1d
+q1d  
 increase ADC bits increase resolution but also increase overall file size
 
 
-q2a
-120(dec) = 1000 0000
-NOTE need to delcare somehow that is a positive number. since by default is 2's complement
+q2a  
+120(dec) = 1000 0000  
+NOTE need to delcare somehow that is a positive number. since by default is 2's complement  
 e.g. 0 1000 0000 or 1000 000 (unsigned)
 
-q2b
-by default is 2's complement
-neg representation 1010 1011 0001 0010 1110 1111 (bin)
+q2b  
+by default is 2's complement  
+neg representation 1010 1011 0001 0010 1110 1111 (bin)  
 2's complement pos num: 1101 0100 1110 1101 0001 0001 (bin)
 
 -5 565 713 (dec)
 
-q2c
-164 (unsigned), -36 (sign magnitude), -91(1's complement), -92(2's complement)  (all dec)
+q2c  
+164 (unsigned), -36 (sign magnitude), -91(1's complement), -92(2's complement)  (all dec)  
 need declare which is which
 
-q2d
-11 1011(sign-magnitude), 10 0100(1's complement), 10 0101(2's complement)  (all bin)
+q2d  
+11 1011(sign-magnitude), 10 0100(1's complement), 10 0101(2's complement)  (all bin)  
 need declare which is which
 
-q2e
+q2e  
 9.375 
 
-q2f
+q2f  
 0001 0100 0100.1111 (unsigned bin)
 
-q2g
+q2g  
 0101 0011 1001. 0101 0111 (BCD)
 
-q2h
-0 1000 0101 000 0000 0100 0000 0000 0000 (bin floating point)
-word ver:
-42804000 (hex)
+q2h    
+0 1000 0101 000 0000 0100 0000 0000 0000 (bin floating point)  
+word ver: 42804000 (hex)
 
 
-q2i
-C46A 0840(hex) = 1100 0100 0110 1010 0000 1000 0100 0000 (bin)
+q2i  
+C46A 0840(hex) = 1100 0100 0110 1010 0000 1000 0100 0000 (bin)  
 [1][100 0100 0][110 1010 0000 1000 0100 0000]
 
-[100 0100 0] = 136 raw value
-exponent bias -127 = 9
-mantissa = 1.[110 1010 0000 1000 0100 0000]
-shift bits right (since is decoding) by exponent times
-1110 1010 00.00 1000 0100 0000
-936.12890625 (dec)
-rmbr add neg sign because sign bit is 1
+[100 0100 0] = 136 raw value  
+exponent bias: -127 = 9  
+mantissa = 1.[110 1010 0000 1000 0100 0000]  
+shift bits **right** (since is decoding) by exponent times  
+1.110 1010 0000 1000 0100 0000 -> 1110 1010 00.00 1000 0100 0000  
+936.12890625 (dec)  
+rmbr add neg sign because sign bit is 1  
 -936.12890625 (dec)
 
-q3a
+q3a  
 89  = 0101 1001
 
-27  = 0001 1011
--27 = 1110 0100 +1
-    = 1110 0101
+27  = 0001 1011  
+-27 = 1110 0100 +1 = 1110 0101
 
 89-(27)
-0101 1001
-0001 1011
-0010 1100 -- result ok
+| | |     |$^2 ->^1$|$^2$|$^2$  |$^2 ->^1$|$^2$| |
+|-|-|-----|:-------:|-----|-----|:-------:|----|-|
+| |0|~~1~~|    0    |~~1~~|~~1~~|    0    |  0 |1|
+|-|0|  0  |    0    |  1  |  1  |    0    |  1 |1|
+| |0|  0  |    1    |  1  |  1  |    1    |  1 |0|
+    
+^^^ result ok
 
 89+(-27)
-   0101 1001
-   1110 0101
-[1]0011 1110--incorrect as carry not shown
+
+|$^1$|$^1$| | | | | |$^1$| |
+|----|----|-|-|-|-|-|----|-|
+|    | 0  |1|0|1|1|0| 0  |1|
+|  + | 1  |1|1|0|0|1| 0  |1|
+| [1]| 0  |0|1|1|1|1| 1  |0|
+
+^^^ incorrect as carry not shown
 
 q3b
-44 = 0010 1100
--44 = 1101 0011 +1
-    = 1101 0100
-99 = 0110 0011
--99 = 1001 1100 +1
-    = 1001 1101
+44 = 0010 1100  
+-44 = 1101 0011 +1 = 1101 0100  
+99 = 0110 0011  
+-99 = 1001 1100 +1 = 1001 1101
 
 -44 - (+99)
-1101 0100
-0110 0011
-0111 0001 --  incorrect as is positive, overflow
+| |     |$^2$ |$^2$| | |     |$^2 ->^1$|$^2$|
+|-|-----|-----|----|-|-|-----|:-------:|----|
+| |~~1~~|~~1~~|  0 |1|0|~~1~~|    0    |  0 |
+|-|  0  |  1  |  1 |0|0|  0  |    1    |  1 |
+| |  0  |  1  |  1 |1|0|  0  |    0    |  1 |
+
+^^^incorrect as is positive, overflow
 
 -44 + (-99)
-1101 0100
-1001 1101
-[1]0111 0001 --- added extra 1, carry and overflow
+|$^1$| | |$^1$|$^1$| $^1$| | | |
+|----|-|-|----|----|-----|-|-|-|
+|    |1|1|  0 |  1 |  0  |1|0|0|
+|  + |1|0|  0 |  1 |  1  |1|0|1|
+| [1]|0|1|  1 |  1 |  0  |0|0|1|
+
+^^^added extra 1, carry and overflow
 
 q4
 decimal x: 86, 126, 6, 0, -128
