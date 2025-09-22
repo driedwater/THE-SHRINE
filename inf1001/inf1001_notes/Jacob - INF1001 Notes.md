@@ -268,6 +268,10 @@ Logic circuits types:
 - Sequential
 - - Output depends not only on current inputs but past sequence of inputs
 
+ALU is Combinatorial circuit, doesnt use clock
+
+Control Unit and Registers are sequential circuits, uses clock
+
 Basic logic ops:
 - AND
 - OR
@@ -311,15 +315,110 @@ $Z_{NOR} = \bar{A + B} =$
 1 NOR 0 = 0
 1 NOR 1 = 0
 
-![Base Gates](<../../inf1003/inf1003_notes/jacob-images/Base-Gates.png>)
+![Base Gates](<jacob-images/Base-Gates.png>)
 
 ## Boolean algebra Characteristics:
 
-Commutativity (flip inputs does not change outcome): x.y = y.x, x+y = y+x
-Associativity (grouping operations does not change outcome): (x.y).z = x.(y.z), (x+y)+z = x+(y+z)
-Distributivity ()
-?????????????????????
+Will be in quick reference sheet
 
+![boolean-algebra-characteristics](jacob-images/boolean-algebra-characteristics.png)
+
+## Propogation delay
+
+takes time for electricity to travel through circuit, time taken ($\Delta t$)
+
+## Canonical form
+
+is 
+
+## Sum of Product
+basically "sum" (basically or) all options in truth table that output 1 (i.e. maxterm) 
+e.g.
+ABC and A\`BC give 1, then ABC OR A\`BC = $ABC + \`ABC$
+
+## Product of Sum
+basically "multiply" (basically and) all options in truth table that output 0 (i.e. minterm) 
+e.g.
+ABC and A\`BC give 0, then ABC AND A\`BC = $ABC . \`ABC$
+
+## Ripple (carry) adder
+
+made of half adder and full adder  
+2x half adder = full adder
+![adders](jacob-images/adders.png)  
+![truth-table-to-circuit-1](jacob-images/truth-table-to-circuit-1.png)  
+![truth-table-to-circuit-2](jacob-images/truth-table-to-circuit-2.png)  
+
+
+chaining multiple full adders together can add N-bit numbers  
+each carry bit "ripples" to next full adder
+slow for many bits
+- Since the carry may need to be propagated along the longest path from the LSB to
+the MSB, the delay is proportional to the bit length to be added.
+
+![ripple-example](jacob-images/ripple-example.png)  
+![alt text](jacob-images/ripple-longest-path.png)
+
+## MUX and DEMUX
+
+MUX is choose 1 of many and send through one output  
+
+![mux-representations](jacob-images/mux-representations.png)
+
+DEMUX is choose 1 of many output using an isolated select input and send data from single input
+
+![demux](jacob-images/demux.png)
+
+N-Multiplexer  
+has $2^n$ inputs  
+has n select(address) inputs
+has 1 output
+
+high level multiplexer can be constructed using lower level multiplexer
+
+for multiplexer gate, sel = 0 is choose top, sel = 1 is choose bottom
+
+multiplexer equation:
+use control inputs and which input selected  
+for which input selected, assume val is 1
+e.g.  
+![MUX-equation](jacob-images/MUX-equation.png)
+
+multiplexer boolean:  
+![multiplexer-boolean](jacob-images/multiplexer-boolean.png)
+
+## Logic Shift
+
+SL = Shift left, multiply by 2
+SR = Shift Right, divide by 2
+
+does not preserve sign bit  
+once shifted, vacant positions filled usually by 0
+
+![SL](jacob-images/SL.png) ![SR](jacob-images/SR.png)
+
+![SL-mux](jacob-images/SL-mux.png)
+
+## Comparator
+
+used to check if bit is =, > or <
+
+![1bit-comparator](jacob-images/1bit-comparator.png)
+
+n-bit comparator:  
+2 ways to do:  
+- binary subtraction: outputs: >= or <  
+- XOR each bit or inputs then OR all XOR ouput: outputs: =, !=  
+
+![comparator-adder](jacob-images/comparator-adder.png) ![comparator-xor](jacob-images/comparator-xor.png)
+
+if combine both circuit, n-bit comparator done
+|Subtraction|XOR|result|
+|:---------:|:-:|:----:|
+|     0     | 0 |  x   |
+|     0     | 1 |  <   |
+|     1     | 0 |  =   |
+|     1     | 1 |  >   |
 
 # tut1
 

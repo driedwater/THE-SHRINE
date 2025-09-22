@@ -933,7 +933,7 @@ Q4a: Arch 1 since have 22 parallel busses
 Q4b: none. need 1 clock to read info, and 1 clock to store info assuming no need clock cycle to process  
 Q4c: Arch 3, can read output in one cycle rather than write back to registers and read again from registers like arch 1 and 2
 
-ANS KEY:
+**ANS KEY:**
 Q1: CISC, CISC, RISC, CISC
 
 Q2: SISD, SIMD, MIMD
@@ -983,7 +983,170 @@ Arch 3: one bus for all input and output. ALU has a bus from output back to one 
 4c : Arch 3 has dedicated bus for this but arch 1 is almost the same. Arch 2 is less effecient than both
 
 
-Quiz 1:
+## Tut2 ANS
+
+for subtraction: assume CPU perform 2's complement addition and the status flags will set/clear based on addition
+
+Q1a:
+
+|$^1$| | | | | | | | |
+|----|-|-|-|-|-|-|-|-|
+|    |1|0|0|1|1|0|0|1|
+|  + |1|1|0|0|0|0|0|0|
+| [1]|0|1|0|1|1|0|0|1|
+C = 1, V = 1
+is overflow since (A(Sign) and B(Sign)) != C(Sign)
+
+Q1b:
+
+|$^1$|$^1$|$^1$|$^1$| | | |$^1$| |
+|----|----|----|----|-|-|-|----|-|
+|    |  1 |  0 |  1 |1|0|1|  0 |1|
+|  + |  1 |  1 |  0 |1|0|0|  0 |1|
+| [1]|  1 |  0 |  0 |0|0|1|  1 |0|
+C = 1, n = 1
+
+Q1c:
+0xFF + 0x01
+|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$| |
+|----|----|----|----|----|----|----|----|-|
+|    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |1|
+|  + |  0 |  0 |  0 |  0 |  0 |  0 |  0 |1|
+| [1]|  0 |  0 |  0 |  0 |  0 |  0 |  0 |0|
+C = 1, Z = 1 (WHY NO OVERFLOW?)
+is not overflow since (A(Sign) != B(Sign))
+
+Q1d:
+0x26 + 0x54
+|    |$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|    | |
+|----|----|----|----|----|----|----|----|-|
+|    |  0 |  0 |  1 |  0 |  0 |  1 |  1 |0|
+|  + |  0 |  1 |  0 |  1 |  1 |  0 |  1 |0|
+| [0]|  1 |  0 |  0 |  0 |  0 |  0 |  0 |0|
+V = 1, N = 1
+
+Q1e:
+1010 1010 - 1010 1010  
+2's comp:
+1010 1010 -1 = 1010 1001
+= 0101 0110
+
+|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|    | |
+|----|----|----|----|----|----|----|----|-|
+|    |  1 |  0 |  1 |  0 |  1 |  0 |  1 |0|
+|  + |  0 |  1 |  0 |  1 |  0 |  1 |  1 |0|
+| [1]|  0 |  0 |  0 |  0 |  0 |  0 |  0 |0|
+z = 1,, c = 1
+is not overflow since (A(Sign) != B(Sign))
+
+Q1f:
+0011 0010 - 0100 1100  
+2's comp:
+0100 1100 - 1 = 0100 1011
+= 1011 0100
+
+|    |    |$^1$|$^1$|    |    |    |    | |
+|----|----|----|----|----|----|----|----|-|
+|    |  0 |  0 |  1 |  1 |  0 |  0 |  1 |0|
+|  + |  1 |  0 |  1 |  1 |  0 |  1 |  0 |0|
+| [0]|  1 |  1 |  1 |  0 |  0 |  1 |  1 |0|
+N = 1
+is not overflow since (A(Sign) != B(Sign))
+
+Q1g:
+0xCF - 0x89 = 1100 1111 - 1000 1001
+2's comp:
+1000 1001 - 1 = 1000 1000
+= 0111 0111
+
+|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$|$^1$| |
+|----|----|----|----|----|----|----|----|-|
+|    |  1 |  1 |  0 |  0 |  1 |  1 |  1 |1|
+|  + |  0 |  1 |  1 |  1 |  0 |  1 |  1 |1|
+| [1]|  0 |  1 |  0 |  0 |  0 |  1 |  1 |0|
+C = 1
+is not overflow since (A(Sign) != B(Sign))
+
+Q1h:
+0x83 - 0x11 = 1000 0011 - 0001 0001
+2's comp:
+0001 0001 - 1 = 0001 0000
+= 1110 1111
+
+|$^1$|    |   |    |$^1$|$^1$|$^1$|$^1$| |
+|----|----|----|----|----|----|----|----|-|
+|    |  1 |  0 |  0 |  0 |  0 |  0 |  1 |1|
+|  + |  1 |  1 |  1 |  0 |  1 |  1 |  1 |1|
+| [1]|  0 |  1 |  1 |  1 |  0 |  0 |  1 |0|
+v = 1, c = 1
+is overflow since (A(Sign) and B(Sign)) != C(Sign)
+
+-----------------
+
+Q2a
+R5 = 0000 0110 = #6
+R6 = 0000 0110 = #6
+
+Note:  
+MOV.b #6,R5 can be considered direct address
+
+Q2b
+Z means off
+|Instruction|Step|PC |   IR    |Data Bus |Address Bus|R5 |R6 |
+|:---------:|:--:|:-:|:-------:|:-------:|:---------:|:-:|:-:|
+|MOV #6, R5 |  0 | 0 |    0    |    Z    |     Z     | 0 | 0 |
+|           |  1 | 0 |    0    |MOV #6,R5|     0     | 0 | 0 |
+|           |  2 | 0 |MOV #6,R5|    Z    |     Z     | 0 | 0 |
+|           |  3 | 1 |MOV #6,R5|    6    |     Z     | 0 | 0 |
+|           |  4 | 1 |MOV #6,R5|    Z    |     Z     | 6 | 0 |
+|           |  5 | 0 |MOV #6,R5|    Z    |     1     | 6 | 0 |
+|-----------|----|---|---------|---------|-----------|---|---|
+|ADD R5,R6  |  6 | 0 |MOV #6,R5|ADD R5,R6|     1     | 6 | 0 |
+|           |  7 | 0 |ADD R5,R6|    Z    |     Z     | 6 | 0 |
+|           |  8 | 0 |ADD R5,R6|    6    |     Z     | 6 | 0 |
+|           |  9 | 0 |ADD R5,R6|    0    |     Z     | 6 | 0 |
+|           | 10 | 0 |ADD R5,R6|    6    |     Z     | 6 | 6 |
+
+Note, registers do not have addresses. only memory has addresses  
+in ASM, even if you write R5 and R6 as src and dst in the instruction, they dont actually have an address since is register
+
+Q2c
+
+Cannot be MSP430 since MSP430 instructions are always stored as even addresses
+
+---------------
+
+Q3a
+|Address |Content|
+|--------|-------|
+|0x00220B| 0x56  |
+|0x00220A| 0xB6  |
+|0x002209| 0xa5  |
+|0x002208| 0x31  |
+|0x002207| 0x31  |
+|0x002206| 0x30  |
+|0x002205| 0x31  |
+|0x002204| 0x54  |
+|0x002203| 0x43  |
+|0x002202| 0x49  |
+|0x002201| 0xBB  |
+|0x002200| 0xE7  |
+
+Q3b
+(i) H`31
+(i1) H`3154
+(iii) H\`31 H\`31 H\`30 H\`31 H\`54 H\`43 H\`49  
+
+31 = 0011 0001 = 1
+31 = 0011 0001 = 1
+30 = 0011 0000 = 0
+31 = 0011 0001 = 1
+54 = 0101 0100 = T
+43 = 0100 0011 = C
+49 = 0100 1001 = I
+
+
+## Quiz 1:
 
 - 16bit RISC
 - PUSH #1000h, SP @ 1234, Value of R1 i.e. SP after exec = 1232
