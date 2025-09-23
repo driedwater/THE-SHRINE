@@ -509,6 +509,521 @@ $25\leq\N$
 Ans: $26$
 
 
+# Topic 4 : Propositional Logic
+
+aka Propositional Calculus or Zeroth-Order Logic
+
+dealing with true or false propositions and logical connectives 
+forms compound propositions.
+
+sentance must be a declaration. Even if declaration is wrong, it is still a proposition.  
+E.g. 2+2 = 3
+
+sentances that are not declarations cannot be propositions.  
+E.g. How old are you?
+
+--------------
+
+## Notation
+
+use letters to denote propositional variables or statement variables  
+conventional letters used for propositional variables are $p, q, r, s, ...$
+
+⊤ or T: proposition is true, (Known as a “tee”, “downtack”, or “verum” symbol.)
+
+⊥ or F: proposition is false, (Known as an “up tack” or “falsum” symbol.)
+
+¬ or -: negation, NOT gate
+
+∧: called "wedge", conjuction, AND gate
+
+∨: called "vee", disjuction, OR gate
+
+⊻ or ⊕: Exclusive disjunction, XOR gate
+
+→ or ⇒: Imply, Material Conditional
+
+⇔: Material Biconditional, NOT XOR gates
+
+Let $p$ and $q$ be propositions.  
+The proposition $q → p$ is the **converse** of $p → q$.  
+The proposition $¬q → ¬p$ is the **contrapositive** of $p → q$.  
+The proposition $¬p → ¬q$ is the **inverse** of $p → q$.  
+
+**Precedence of logical connectives**  
+1. Rule 1: The negation operator (¬) is applied before all other logical operators.
+   - So, $¬p ∧ q$ means $¬(p) ∧ q$.  
+2. Rule 2: The conjunction operator (∧) takes precedence over the disjunction operator (∨).
+   - So, $p ∧ q ∨ r$ means $(p ∧ q) ∨ r$, rather than $p ∧ (q ∨ r)$ .  
+3. Rule 3: The material conditional and biconditional operators (→ and ⇔) have lower
+precedence than the conjunction ∧ and disjunction ∨ operators.
+   - So, $p → q ∨ r$ means $p → (q ∨ r)$ 
+
+|Connective            |Operator|Precedence|
+|:---------------------|:------:|:--------:|
+|Negation              |   ¬    |     1    |
+|Conjunction           |   ∧    |     2    |
+|Disjunction           |   ∨    |     3    |
+|Material Conditional  |   →    |     4    |
+|Material Biconditional|   ⇔   |     5    |
+
+XOR between 2 and 3, no universal standard  
+if needed in exam, prof will write into the qn when to do XOR
+
+
+
+OTHER USEFUL EQUIVALENCES
+
+- Equivalences involving conditionals:
+- - $$p → q ≡ ¬q → ¬p$$ -(Proposition–Contrapositive; or Converse–Inverse)
+- - $$p ∨ q ≡ ¬p → q$$
+- - $$p ∧ q ≡ ¬(p → ¬q)$$
+- - $$¬(p → q) ≡ p ∧ ¬q$$
+- Equivalences involving biconditionals:
+- - $$p ⇔ q ≡ (p → q) ∧ (q → p) ≡ ¬p ⇔ ¬q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)$$
+- - $$¬(p ⇔ q) ≡ p ⇔ ¬q ≡ p ⊕ q$$
+
+---------------
+
+## Propositions
+
+aka Boolean Statements
+
+proposition is a declarative sentence.
+declares a fact that is either true or false, but not both.
+
+--------------
+
+### Negation:
+
+Logic gate: NOT
+
+Let $p$ be proposition.  
+The negation of $p$, denoted by $-p$, is the statement that the proposition $p$ is false.  
+read as "not p"
+
+¬: special NOT symbol
+
+be careful when interpreting propositions, dont over interpret
+E.g.  
+p = Vandana’s smartphone does not have at least 32 GB of memory.
+¬p should be: Vandana’s smartphone **does** have at least 32 GB of memory.
+It should not be: Vandana’s smartphone **does** have **more than** 32 GB of memory.
+
+------------------
+
+## Connectives
+
+### Conjuction
+
+Logic gate: AND
+
+Let $p$ and $q$ be propositions.  
+The conjunction of $p$ and $q$, denoted by $p ∧ q$, is the proposition “$p$ and $q$”.  
+∧: called "wedge"
+
+ways to say:
+- and
+- but, e.g. p but not r = p and not r
+------------------
+
+### Disjunction
+
+Logic gate: OR
+
+Let $p$ and $q$ be propositions. 
+The disjunction of $p$ and $q$, denoted by $p ∨ q$, is the
+proposition “p or q”.  
+∨: called "vee"
+------------------
+
+### Exclusive Disjunction
+
+Logic gate: XOR
+
+Let $p$ and $q$ be propositions. 
+The disjunction of $p$ and $q$, denoted by $p ⊻ q$ or $p ⊕ q$, is the
+proposition “p exclusive or q”.
+
+------------------
+
+### Material Conditional
+
+Logic gate: IMPLY
+
+Let $p$ and $q$ be propositions.  
+The material conditional or material implication, denoted as "$p → q$" or "$p ⇒ q$", is the proposition “if p, then q” or “p implies q”.  
+
+asserts that $q$ is true on the condition that $p$ holds.
+**Note**: when $p$ is false, then $p → q$ is true, regardless of the truth value of $q$.
+
+if left hand side true (antecident true) but right hand side (consequence false)
+
+| p | q |$p → q$|
+|---|---|-------|
+| F | F |   T   |
+| F | T |   T   |
+| T | F |   F   |
+| T | T |   T   |
+
+The Many ways to say $p → q$:
+- “if $p$, then $q$”;
+- “when/whenever $p$, $q$”;
+- “$p$ implies $q$”;
+- “$p$ only if $q$”;
+- “a sufficient condition for $q$ is $p$”;
+- “$q$ is necessary for $p$”;
+- “a necessary condition for $p$ is $q$”;
+- “$q$ unless not $p$”
+- “unless not $p$, $q$”
+
+NOT examples on how to say:
+- “$q$ when/whenever $p$”;
+- “$p$ is sufficient for $q$”;
+- if $q$, will $p$
+- if $q$, $p$ will happen
+
+Material Conditional example:  
+
+-----------------
+Example 1:  
+Consider the following statement: “If it rains, then I will remain indoors.”  
+If indeed it rains, then you will expect to find me indoors.  
+However, if it does not rain, it does not mean that I have to go outside. I have the option of
+either remaining indoors or going outside, when it does not rain.
+
+***Fr guys, just write out a whole truthtable***
+"Me taking notes is necessary for me to score an A grade in the module."
+Correct ans is :
+$p$ = score an A grade
+$q$ = took notes
+
+"if $p$ then $q$" or "if $p$, it implies $q$"
+
+WRONG ANS  
+if $q$, i will $p$ -----> wrong since you can also score A and not take notes, smarty-pants
+
+Truth Table:  
+
+| got A Grade? | took notes? | if got A grade, implies took notes|
+|:------------:|:-----------:|:----------------------------------------------:|
+|      No      |      No     |Bum never study, maybe which we treat as true   |
+|      No      |     Yes     |L very unfortunate, maybe which we treat as true|
+|      Yes     |      No     |HUH HOW!? this guy cheating fr.  PROVES FALSE   |
+|      Yes     |     Yes     |Proves proposition right, of course True lah    |
+
+---------------------------
+
+Example 2:  
+Consider the conditional statement “If I perform well, I will not get a pay raise”.  
+What are the converse, the contrapositive, and the inverse of this statement?  
+
+Let $p$ be the proposition “I perform well”;  
+Let $q$ be the proposition “I get a pay raise”.  
+Thus $¬q$ is "I do not get a pay raise"
+
+Better to do truth table  
+
+| perform well? | didnt get a raise? |I perform well, I will not get a pay raise|
+|:-------------:|:------------------:|:---------------------------------------:|
+|       No      |         No         | Bum what you expect. Maybe i.e. true|
+|       No      |        Yes         | Maybe you SAF encik and you hit timelimit. Maybe i.e. true|
+|       Yes     |         No         |  OI IN WHAT UNIVERSE!? PLEASE ISEKAI ME THERE   |
+|       Yes     |        Yes         | Proves proposition right, of course True lah|
+
+------------------
+
+### Material Biconditional
+
+Logic Gate: XNOR
+
+Let $p$ and $q$ be propositions.  
+The material biconditional or material bi-implication, denotaed as "$p ⇔ q$", is the proposition “$p$ if and only if $q$”.  
+The material biconditional $p ⇔ q$ is true when p and q have the same truth values; and false otherwise.  
+
+Note that $p ⇔ q$ is true when both the material conditionals $p → q$ and $q → p$ are true;
+otherwise, it is false.
+
+Thus, we can say "if and only if" for this connective.  
+Other ways to say:  
+- $p iff q$ (yes it is **iff**, not if)
+- $p$ is a necessary and sufficient condition for $q$
+- $q$ if and only if $p$ 
+
+|$p$|$q$|$p ⇔ q$|
+|---|---|--------|
+| F | F |   T    |
+| F | T |   F    |
+| T | F |   F    |
+| T | T |   T    |
+
+Derivation of truth table above
+| p | q |$p → q$|$q → p$|$(p → q) ∧ (q → p)$|
+|---|---|-------|-------|-------------------|
+| F | F |   T   |   T   |         T         |
+| F | T |   T   |   F   |         F         |
+| T | F |   F   |   T   |         F         |
+| T | T |   T   |   T   |         T         |
+
+-------------
+
+### Converse, Contrapositive, Inverse
+
+Let $p$ and $q$ be propositions.
+The proposition $q → p$ is the **converse** of $p → q$.
+The proposition $¬q → ¬p$ is the **contrapositive** of $p → q$.
+The proposition $¬p → ¬q$ is the **inverse** of $p → q$.
+
+Note:  
+Only the **contrapositive** has the **same truth table** as $p → q$  
+Truth tables of the **converse** and **inverse** are  the same.
+
+REMINDER: Not all propositions are true. BUT they are still propositions nonetheless
+
+Example:
+
+----------------
+This a bit tricky  
+This is a Material conditional statement  
+Consider the conditional statement “The home team wins whenever it is raining”.  
+What are the converse, the contrapositive, and the inverse of this statement?  
+
+Let $p$ be the proposition “it is raining”;  
+Let $q$ be the proposition “the home team wins”.  
+
+Better to do truth table  
+
+| is raining | home team winning? |The home team wins whenever it is raining|
+|:----------:|:------------------:|:---------------------------------------:|
+|     No     |         No         |Does not prove or disprove this, basically maybe which we treat as true|
+|     No     |        Yes         |Does not prove or disprove this, basically maybe which we treat as true|
+|     Yes    |         No         |  PROVES THIS GUY LYING.  PROVES FALSE   |
+|     Yes    |        Yes         | Proves proposition right, of course True lah|
+
+Converse, $q$ implies $p$,  
+thus, "if $q$ then $p$"
+"if $q$ then $p$" is not same as "if $p$ then $q$"  
+CONVERSE IS **NOT** THE SAME AS ORIGINAL
+
+CONVERSE Truth table  
+"if Home Team Winning, then it is raining"
+| is raining | home team winning? |if Home Team Winning, then it is raining|
+|:----------:|:------------------:|:---------------------------------------:|
+|     No     |         No         |Does not prove or disprove this, basically maybe which we treat as true|
+|     No     |        Yes         |Proved proposition false|
+|     Yes    |         No         |Does not prove or disprove this, basically maybe which we treat as true|
+|     Yes    |        Yes         | Proves proposition right, of course True lah|
+
+Contrapositive, not $q$ implies not $p$,  
+If the home team is not wining, then it is not raining.  
+- Explanation
+- If you see weather is rain, then you know home team win.  
+- If you see home team lose, then you know it wasnt raining  
+CONTRAPOSITIVE **IS** THE SAME AS ORIGINAL
+
+CONTRAPOSITIVE Truth table  
+| is raining | home team winning? |not is raining|not home team winning|If the home team is not wining, then it is not raining|
+|:----------:|:------------------:|:-:|:-:|:---------------------------------------:|
+|     No     |         No         |Yes|Yes|Proved true|
+|     No     |        Yes         |Yes|No |lucky day? maybe|
+|     Yes    |         No         |No |Yes|raining and not winning? Proved false|
+|     Yes    |        Yes         |No |No |doesnt prove this, maybe i.e. true|
+
+Inverse, not $p$ implies not $q$,
+If it is not raining, then the home team does not win.
+INVERSE IS **NOT** THE SAME AS ORIGINAL
+INVERSE IS THE **SAME AS CONVERSE**
+
+INVERSE Truth table  
+| is raining | home team winning? |If it is not raining, then the home team does not win.|
+|:----------:|:------------------:|:---------------------------------------:|
+|     No     |         No         |Proved true|
+|     No     |        Yes         |proved false|
+|     Yes    |         No         |Maybe|
+|     Yes    |        Yes         |Maybe|
+
+--------------
+
+example  
+Classify an arbitrary object.
+if shape is square, then shape is rectangle
+
+let $p$ be "shape is square"  
+let $q$ be "shape is rectangle"
+
+|$p$|$q$|$p → q$|Reason|
+| F | F |   T   |arbitrary shape is neither (maybe)|
+| F | T |   T   |arbitrary shape is rectangle (maybe)|
+| T | F |   F   |arbitrary shape is square and not rectangle (false)|
+| T | T |   T   |arbitrary shape is square and rectangle (always true)|
+
+CONVERSE  
+if shape is rectangle, then shape is square
+|$p$|$q$|$q → p$|Reason|
+| F | F |   T   |arbitrary shape is neither (maybe)|
+| F | T |   F   |arbitrary shape is rectangle but not square (false)|
+| T | F |   T   |true because in this case p is true if q. Since q is F, does not matter what p is|
+| T | T |   T   |arbitrary shape is square and rectangle (always true)|
+
+
+## Precedence of logical connectives
+
+1. Rule 1: The negation operator (¬) is applied before all other logical operators.
+   - So, $¬p ∧ q$
+means $¬(p) ∧ q$.  
+2. Rule 2: The conjunction operator (∧) takes precedence over the disjunction operator (∨).
+   - So, $p ∧ q ∨ r$ means $(p ∧ q) ∨ r$, rather than $p ∧ (q ∨ r)$ .  
+3. Rule 3: The material conditional and biconditional operators (→ and ⇔) have lower
+precedence than the conjunction ∧ and disjunction ∨ operators.
+   - So, $p → q ∨ r$ means $p → (q ∨ r)$ 
+
+|Connective            |Operator|Precedence|
+|:---------------------|:------:|:--------:|
+|Negation              |   ¬    |     1    |
+|Conjunction           |   ∧    |     2    |
+|Disjunction           |   ∨    |     3    |
+|Material Conditional  |   →    |     4    |
+|Material Biconditional|   ⇔   |     5    |
+
+XOR between 2 and 3, no universal standard  
+if needed in exam, prof will write into the qn when to do XOR
+
+## Compound Proposition
+
+compound proposition refers to an expression formed from atomic propositional variables ($p,q,r,s$) using logical connectives (operators).  
+Examples representations:
+
+--------
+$¬r$
+$p ∨ q$
+$p ⇔ q$
+$(p → q) ∧ (r → p)$
+$(r ∧ q) → (r ⊕ p)$
+
+-----------
+Examples:
+
+--------------
+Construct Truth Table for: $(p ∨ ¬q) → (p ∧ q)$
+
+|p|q|¬q|$p ∨ ¬q$|$p ∧ q$|$(p ∨ ¬q) → (p ∧ q)$|
+|-|-|--|--------|-------|--------------------|
+|F|F| T|    T   |   F   |         F          |
+|F|T| F|    F   |   F   |         T          |
+|T|F| T|    T   |   F   |         F          |
+|T|T| F|    T   |   T   |         T          |
+
+## Logical equivelence
+
+Compound propositions $P$ and $Q$ are logically equivalent if $P ⇔ Q$ is a tautology (Has identical truth table).  
+The notation $P ≡ Q$ denotes that $P$ and $Q$ are logically equivalent.
+
+Example  
+
+--------------
+De Morgan laws
+Show $¬(p ∧ q) ≡ ¬p ∨ ¬q$ (law 1)
+|$p$|$q$|$p ∧ q$|$¬(p ∧ q)$|$¬p$|$¬q$|$¬p ∨ ¬q$|
+|---|---|-------|----------|----|----|---------|
+| F | F |   F   |    T     |  T |  T |    T    |
+| F | T |   F   |    T     |  T |  F |    T    |
+| T | F |   F   |    T     |  F |  T |    T    |
+| T | T |   T   |    F     |  F |  F |    F    |
+
+Show $¬(p ∨ q) ≡ ¬p ∧ ¬q$ (law 2)
+|$p$|$q$|$p ∨ q$|$¬(p ∨ q)$|$¬p$|$¬q$|$¬p ∧ ¬q$|
+|---|---|-------|----------|----|----|---------|
+| F | F |   F   |    T     |  T |  T |    T    |
+| F | T |   T   |    F     |  T |  F |    F    |
+| T | F |   T   |    F     |  F |  T |    F    |
+| T | T |   F   |    T     |  F |  F |    F    |
+
+-----------
+
+is $p → q ≡ ¬p ∨ q$?
+
+|$p$|$q$|$¬p$|$p → q$|$¬p ∨ q$|
+|---|---|----|-------|--------|
+| F | F |  T |   T   |   T    |
+| F | T |  T |   T   |   T    |
+| T | F |  F |   F   |   F    |
+| T | T |  F |   T   |   T    |
+
+ans: yes since truth tables identical
+
+-------------------
+
+OTHER USEFUL EQUIVALENCES
+
+- Equivalences involving conditionals:
+- - $$p → q ≡ ¬q → ¬p$$ -(Proposition–Contrapositive; or Converse–Inverse)
+- - $$p ∨ q ≡ ¬p → q$$
+- - $$p ∧ q ≡ ¬(p → ¬q)$$
+- - $$¬(p → q) ≡ p ∧ ¬q$$
+- Equivalences involving biconditionals:
+- - $$p ⇔ q ≡ (p → q) ∧ (q → p) ≡ ¬p ⇔ ¬q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)$$
+- - $$¬(p ⇔ q) ≡ p ⇔ ¬q ≡ p ⊕ q$$
+
+## Tautology, Contradiction, Contingency, Satifiability
+
+### Tautology
+
+A compound proposition that is always true, no matter what the truth values of its
+propositional variables, is **called a tautology**.
+
+**Always true for all inputs**
+
+-------
+
+### Contradiction
+
+A compound proposition that is always false is called a contradiction.
+
+**Always false for all inputs**
+
+--------
+
+### Contingency
+
+A compound proposition that is neither a tautology nor a contradiction is called a
+contingency.
+
+**True for some inputs, False for other inputs**
+
+--------
+
+### Satifiability
+
+A proposition is satisfiable if it is **true under some assignment of values** to its propositional variables.
+
+Satisfied = Value is true (wether through combination of inputs or tautology)
+Satisfiable = Value can be made to be true through combination of inputs
+
+Tautologies are satisfiable.
+- always satisfied.
+- i.e always true for any assignment of values to input.
+
+Contradictions are unsatisfiable.
+- never satisfied.
+- i.e. always false for any assignment of values to input.
+
+Contingencies are satisfiable.
+- can be either satisfied or not satisfied.
+- i.e. either true or false depending on input.
+- satisfied by some input, unsatisfied by others.
+- *Note that contingencies, by definition, are neither tautologies nor contradictions.
+
+
+Example
+
+--------
+
+𝑝 ∨ ¬𝑝 is a tautology.  
+𝑝 ∧ ¬𝑝 is a contradiction.
+
+---------
+
+
 # Tutorial 1 
 ## q1
 1a. $\displaystyle\sum_{k=1}^5(k+1)$
@@ -715,3 +1230,75 @@ normal euclidian algo, just practice application
 ## Q12
 
 when applying extended euclidian, be careful when simplifying and when making remainder the subject of the equation
+
+
+# Tutorial 3 
+## q1
+
+# Tutorial 4 
+## q1
+
+a. Missing the final exam implies you will not pass the course
+b. Having Covid-19 or missing the final exam implies you will not pass the course
+
+|$p$|$q$|$r$|$¬r$|$p → ¬r$|$q → ¬r$|$(p → ¬r) ∨ (q→ ¬r)$|$(p ∨ q) → ¬r$ (wrong)|
+|---|---|---|----|--------|--------|--------------------|--------------|
+| F | F | F | T  |   T    |   T    |         T          |     T        |
+| F | F | T | F  |   T    |   T    |         T          |     T        |
+| F | T | F | T  |   T    |   T    |         T          |     T        |
+| F | T | T | F  |   T    |   F    |         T          |     F        |
+| T | F | F | T  |   T    |   T    |         T          |     T        |
+| T | F | T | F  |   F    |   T    |         T          |     F        |
+| T | T | F | T  |   T    |   T    |         T          |     T        |
+| T | T | T | F  |   F    |   F    |         F          |     F        |
+
+c. You will pass the course if you did not miss the exam or missed the exam due to having having COVID-19
+|$p$|$q$|$r$|$¬q$|$p ∧ q$|$¬q ∧ r$|$(p ∧ q) ∨ (¬q ∧ r)$|
+|---|---|---|----|-------|--------|---------------------|
+| F | F | F | T  |   F   |   F    |         F           |
+| F | F | T | T  |   F   |   T    |         T           |
+| F | T | F | F  |   F   |   F    |         F           |
+| F | T | T | F  |   F   |   F    |         F           |
+| T | F | F | T  |   F   |   F    |         F           |
+| T | F | T | T  |   F   |   T    |         T           |
+| T | T | F | F  |   T   |   F    |         T           |
+| T | T | T | F  |   T   |   F    |         T           |
+
+
+## q2
+
+a. $p ∧ ¬q$
+b.
+|$p$|$q$|$¬q$|$(p ∧ ¬q) → r$|
+|---|---|----|--------------|
+| F | F | T  |              |
+| F | T | F  |              |
+| T | F | T  |              |
+| T | T | F  |              |
+c.
+d.
+
+
+## q3
+
+a.
+b.
+c.
+
+
+## q4
+
+a.
+b.
+c.
+d.
+e.
+
+
+## q5
+
+## q6
+
+## q7
+
+## q8
