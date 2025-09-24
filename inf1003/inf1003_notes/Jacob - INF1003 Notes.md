@@ -1231,9 +1231,213 @@ normal euclidian algo, just practice application
 
 when applying extended euclidian, be careful when simplifying and when making remainder the subject of the equation
 
+------------
 
 # Tutorial 3 
+
+product rule can be extended to more than 2 ways to do task
+
+subtraction rule is more general form off sum rule
+
+$C(n,r) = \frac{n!}{r!(n-r)!} = \frac{P(n,r)}{r!}$
+
+^^ application of division rule, as order does not matter so items that have the same elements in different order are considered identical.
+
+num pigeonholes always less than num pigeons for pigeonhole principle to work
+
 ## q1
+
+a:  
+subtask 1: find a position for the bride  
+subtask 2: find ordered arrangement of 5-1=4 non-repetitive people out of pool of 10-1=9 people  
+$P(9,4) = 3024$
+$3024*5=15120$
+ans: 15120
+
+b: 
+subtask1: find pos for brid  
+subtask 2: find pos for groom  
+subtask 3: find ordered arrangement of 5-2=3 non-repetittive people out of pool of 10-2=8  
+$P(8,3) = 336$
+$5*4*336 = 6720$
+ans: 6720
+
+c:
+subtask 1: brid or groom pos  
+subtask 2: dettermine iff bride or groom in pic  
+subtask 3: find ordered arrangemenr of $5-1=4$ non-repetitive people out of pool of $10-2=8$  
+$P(8,4) = 1680$
+$5*2*1680=16800$
+ans: 16800
+
+Note: be careful of pool to choose from
+
+## q2
+
+a:
+apply product rule, cannot use permutation as arrangement can include repetitive elements  
+task determine all 8 bit  
+eacch bit is subtask with 2 ways to choose  
+num ways to do  is $2^8 = 256$
+ans: 256
+
+b:
+task: determin positions of four 1's in string
+find unordered arrangement off 4 non-repetitive positions out of 10
+basically, choose from positions, not choose from 0 or 1  
+use combination as the order of the 4 chosen positions does not matter  
+$C(10,4)=\frac{10!}{4!(10-4)!}=210$
+ans:210
+
+c:
+task find num strings that contain at most four 1's
+same as b, choose from positions, use combination as order of chosen places does not matter  
+set of strings with no 1's: $C(10,0) = 1$  
+set of strings with one 1: $C(10,1) = 10$  
+set of strings with two 1: $C(10,2) = 45$  
+set of strings with three 1: $C(10,3) = 120$  
+set of strings with four 1: $C(10,4) = 210$  
+apply sum rule  
+sum all sets: $1+10+45+120+210=386$  
+ans: 386
+
+d:
+same idea as part c but for 4-10
+set of strings with four 1's: $C(10,4) = 210$  
+set of strings with five 1: $C(10,1) = 252$  
+set of strings with six 1: $C(10,2) = 210$  
+set of strings with seven 1: $C(10,3) = 120$  
+set of strings with eight 1: $C(10,4) = 45$  
+set of strings with nine 1: $C(10,4) = 10$  
+set of strings with ten 1: $C(10,4) = 1$  
+apply sum rule  
+sum all sets: $210+252+210+45+10+1=386$  
+ans: 848
+
+## q3
+about permutations
+
+a:  
+permutation containing string BCD  
+let BCD be X  
+number off permutation of letters AEFGX  
+$P(5,5) = 5! = 120$
+
+b:  
+permutation containing string CFEA  
+let CFEA be X
+num permutations of BDGX  
+$P(4,4) = 4! = 24$
+
+c: 
+permutation containing string BA and GF  
+let BA = X, GF = Y  
+num permutations of CEDXY  
+$P(5,5) = 5! = 120$
+
+d:  
+permutation containing string ABC and DE  
+let ABC = X, DE = Y  
+num permutations of FGXY  
+$P(4,4) = 4! = 24$  
+
+e:  
+permutation containing string ABC and CDEF  
+string that contains ABC and CDEF must contain ABCDEF = X
+num permutations of GX  
+$P(2,2) = 2! = 2$ 
+
+f:
+permutation containing string CBA and BED  
+string is impossible to simultaneously contain CBA and BED as will require both letter A and letter E to come right after B  
+num permutations is 0
+
+## q4
+
+question turns into placing women in slots between men
+
+task: form line with 13 people, 8 men 5 women, so that no woman stands next to another women  
+
+subtask 1: find ordered arangement for 8 non-repetitive men out of pool of 8 men
+
+subtask 2: find ordered arrangement of 5 non-repetitive women out of $8+1=9$ slots
+
+
+num positions for men: 8  
+num positions between men for women: 9
+possible pos for men: $P(8,8) = 8! = 40,320$
+possible pos for women: $P(9,5) = 15,120$
+total num ways to arrange: $40,320 * 15,120 = 609,638,400$
+
+## q5
+
+order of chosen members does not matter, so use combination
+
+subtask 1: find unordered arrangement of 4 non-repetitive men out of pool of 10 men
+$C(10,4) = \frac{10!}{4!(10-4)!} = 210$
+
+
+subtask 2: find unordered arrangement of 4 non-repetitive men out of pool of 15 women
+$C(15,4) = \frac{15!}{4!(15-4)!} = 1365$
+$210 * 1365 = 286650$
+
+ans: 286650
+
+## q6
+
+find correspondance between question and piggeonholes  
+$n$ pigeons placed in $k$ pigeon holes  
+at least one **box** contains at least $\lceil\frac{n}{k}\rceil$ pigeons  
+"*at least 7 students* get the same **score**"
+
+pigeons: students n  
+pigeonholes: possible scores k = 101  
+
+$$\lceil\frac{n}{k}\rceil = \lceil\frac{n}{101}\rceil \geq 7$$
+$$= \frac{n}{101} > 7-1$$
+$$= n > 6*101 $$
+$$= n \geq 607$$
+
+ans: $n \geq 607$
+
+## q7
+
+a;
+find correspondance between question and piggeonholes  
+$n$ pigeons placed in $k$ pigeon holes  
+at least one **box** contains at least $\lceil\frac{n}{k}\rceil$ pigeons 
+
+pairs of int with sum 9 = (1,8), (2,7), (3,6), (4,5)
+
+"there must be a pair on integers with a sum equal to 9" is equivalent to:  
+"at least *two selected numbers* belong to **one of the four pairs** above"
+
+pigeons: selected positive int in range [1,8], n=5  
+pigeonholes: pairs of int that sum to 9, k=4  
+
+$$\lceil\frac{n}{k}\rceil = \lceil\frac{5}{4}\rceil = 2$$
+
+At least 2 int selected is from one of the four pairs with a sum of 9
+
+b:  
+pigeons: selected positive int in range [1,8], n=4  
+pigeonholes: pairs of int that sum to 9, k=4  
+$$\lceil\frac{n}{k}\rceil = \lceil\frac{4}{4}\rceil = 1$$
+At least 1 int selected is from one of the four pairs with a sum of 9
+
+## q8
+
+better to make set of pairs rather than assume all even or all odd
+
+pigeons: houses, n = 51  
+pigeonholes: pairs of consecutive addresses, k = 50
+$$\lceil\frac{n}{k}\rceil = \lceil\frac{51}{50}\rceil = 2$$
+
+50 pairs of onseccutive addresses: (1000, 1001), (1002, 1003), ... , (1098,1099)
+first 50 choose one of two addresses within unique pair
+last house will be unable to choose from a unique pair
+
+-----------
 
 # Tutorial 4 
 ## q1

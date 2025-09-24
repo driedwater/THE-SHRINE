@@ -332,14 +332,21 @@ takes time for electricity to travel through circuit, time taken ($\Delta t$)
 is 
 
 ## Sum of Product
-basically "sum" (basically or) all options in truth table that output 1 (i.e. maxterm) 
+basically "sum" (basically or) all options in truth table that output 1 (i.e. maxterm)  
+each input needs to be a one in the equations.  
+
+e.g.  
+A = 0  
+B = 1  
+C = 1  
+equation part for this line in truth table is \'ABC
 e.g.
-ABC and A\`BC give 1, then ABC OR A\`BC = $ABC + \`ABC$
+ABC and A\`BC give 1, then $ABC\ OR\ A\`BC$ = $ABC + A\`BC$
 
 ## Product of Sum
-basically "multiply" (basically and) all options in truth table that output 0 (i.e. minterm) 
-e.g.
-ABC and A\`BC give 0, then ABC AND A\`BC = $ABC . \`ABC$
+basically "multiply" (basically and) all options in truth table that output 0 (i.e. minterm)  
+e.g.  
+ABC and A\`BC give 0, then $ABC\ AND\ \`ABC$ = $ABC . \`ABC$
 
 ## Ripple (carry) adder
 
