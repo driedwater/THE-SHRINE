@@ -882,15 +882,46 @@ Addressing modes selected by **As** and **Ad**
 
 
 
-
-
-
-
-
-
-
 ## Low-level programming (Chpt 4-6)
 
+## Chap 4: Introduction to ASM
+
+### TF is assembly
+
+|High level langs|Asm|Machine code|
+|:-:|:-:|:-:|
+|e.g.: C, C++, Java, Basic|Asm|Binary|
+|Easy to Write|uses mnemonics of basic instructions|exact binary bits to instruct processor to carry out instructions|
+|Easy to understand|Not as easy|
+|Performs data type casting/checking|Compiles from High Level Langs|
+|limited/no knowledge needed about processor| Need good knowledge on exact ops processor needs to perform|
+|No details running speed / amoumt of memory to store instructions|can calculate memory needed to store code and execution time|
+
+Kinds of statements:
+1. Executable instructions
+   - 
+2. Assembler directives
+
+### Why ASM
+
+1. Very efficient codes by:  
+   - Reduced overheads (e.g. data type checking)
+   - Compact file size
+   - Faster execution (e.g. real time signal processing)
+
+### When ASM?
+
+1. When critical to OS (e.g. kernal)
+2. Input/Output intensive codes (e.g. device driver, streaming data)
+3. Time-critical / time dependant codes
+
+### How ASM (ASM program development)
+
+|Text editor|edit src file text, mnemonics (*.asm)|
+|:---------:|:-------------------:|
+|Assembler  |convert mnemonics in src file to machine code, produce obj file (*.obj)|
+|Linker     |combine several obj files into load module that contains machine code and address info (*.abs)|
+|Loader     |use load module address info, download instruction and data constants into appropriate memory areas for execution|
 
 # Computer Organisation
 

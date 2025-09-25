@@ -642,7 +642,7 @@ proposition “p or q”.
 Logic gate: XOR
 
 Let $p$ and $q$ be propositions. 
-The disjunction of $p$ and $q$, denoted by $p ⊻ q$ or $p ⊕ q$, is the
+The disjunction of $p$ and $q$, denoted by $p ⊻ q$ or $p ⊕ q$ or $p ^ q$, is the
 proposition “p exclusive or q”.
 
 ------------------
@@ -676,10 +676,10 @@ The Many ways to say $p → q$:
 - “a necessary condition for $p$ is $q$”;
 - “$q$ unless not $p$”
 - “unless not $p$, $q$”
+- “$p$ is sufficient for $q$”;
 
 NOT examples on how to say:
 - “$q$ when/whenever $p$”;
-- “$p$ is sufficient for $q$”;
 - if $q$, will $p$
 - if $q$, $p$ will happen
 
@@ -738,7 +738,7 @@ Better to do truth table
 Logic Gate: XNOR
 
 Let $p$ and $q$ be propositions.  
-The material biconditional or material bi-implication, denotaed as "$p ⇔ q$", is the proposition “$p$ if and only if $q$”.  
+The material biconditional or material bi-implication, denotaed as "$p ⇔ q$" or "$p ↔ q$", is the proposition “$p$ if and only if $q$”.  
 The material biconditional $p ⇔ q$ is true when p and q have the same truth values; and false otherwise.  
 
 Note that $p ⇔ q$ is true when both the material conditionals $p → q$ and $q → p$ are true;
@@ -773,6 +773,10 @@ Let $p$ and $q$ be propositions.
 The proposition $q → p$ is the **converse** of $p → q$.
 The proposition $¬q → ¬p$ is the **contrapositive** of $p → q$.
 The proposition $¬p → ¬q$ is the **inverse** of $p → q$.
+
+**Converse** : swap left and right hand sides
+**Contrapositive** : swap left and right hand sides, NOT both sides
+**Inverse** : NOT both sides
 
 Note:  
 Only the **contrapositive** has the **same truth table** as $p → q$  
@@ -1458,51 +1462,229 @@ b. Having Covid-19 or missing the final exam implies you will not pass the cours
 
 c. You will pass the course if you did not miss the exam or missed the exam due to having having COVID-19
 |$p$|$q$|$r$|$¬q$|$p ∧ q$|$¬q ∧ r$|$(p ∧ q) ∨ (¬q ∧ r)$|
-|---|---|---|----|-------|--------|---------------------|
-| F | F | F | T  |   F   |   F    |         F           |
-| F | F | T | T  |   F   |   T    |         T           |
-| F | T | F | F  |   F   |   F    |         F           |
-| F | T | T | F  |   F   |   F    |         F           |
-| T | F | F | T  |   F   |   F    |         F           |
-| T | F | T | T  |   F   |   T    |         T           |
-| T | T | F | F  |   T   |   F    |         T           |
-| T | T | T | F  |   T   |   F    |         T           |
-
+|---|---|---|----|-------|--------|--------------------|
+| F | F | F | T  |   F   |   F    |         F          |
+| F | F | T | T  |   F   |   T    |         T          |
+| F | T | F | F  |   F   |   F    |         F          |
+| F | T | T | F  |   F   |   F    |         F          |
+| T | F | F | T  |   F   |   F    |         F          |
+| T | F | T | T  |   F   |   T    |         T          |
+| T | T | F | F  |   T   |   F    |         T          |
+| T | T | T | F  |   T   |   F    |         T          |
 
 ## q2
 
 a. $p ∧ ¬q$
-b.
-|$p$|$q$|$¬q$|$(p ∧ ¬q) → r$|
-|---|---|----|--------------|
-| F | F | T  |              |
-| F | T | F  |              |
-| T | F | T  |              |
-| T | T | F  |              |
-c.
-d.
+b. $(p ∧ ¬q) → r$
+|$p$|$q$|$r$|$¬q$|$(p ∧ ¬q)$|$(p ∧ ¬q) → r$|
+|---|---|---|----|----------|--------------|
+| F | F | F | T  |     F    |      T       |
+| F | F | T | T  |     F    |      T       |
+| F | T | F | F  |     F    |      T       |
+| F | T | T | F  |     F    |      T       |
+| T | F | F | T  |     T    |      F       |
+| T | F | T | T  |     T    |      T       |
+| T | T | F | F  |     F    |      T       |
+| T | T | T | F  |     F    |      T       |
+
+c. $(p ∧ q) → r$
+
+d. $r ⇔ (p ∨ q)$
 
 
 ## q3
 
-a.
-b.
-c.
+a.  
+p = get to top of Bukit Timah Hill  
+q = need to hike 2km
+if you want to get to top of Bukit Timah Hill, then you need to hike 2km
 
+b.  
+p = drive more than 650 km   
+q = need to buy gasoline  
+if you drive more than 650 km, then you will need to buy gasoline.
+
+c.  
+Xiaoming will go swimming unless the water is too cold.
+p = water is not too cold
+q = Xiaoming will go swimming
+if the water is not too cold, then Xiaoming will go swimming
 
 ## q4
 
-a.
-b.
-c.
-d.
-e.
+a. $(p → q) ⇔ (¬p → ¬q)$  
 
+|$p$|$q$|$¬p$|$¬q$|$(p → q)$|$(¬p → ¬q)$|$(p → q) ⇔ (¬p → ¬q)$|
+|:-:|:-:|:--:|:--:|:-------:|:---------:|:--------------------:|
+| F | F | T  | T  |    T    |     T      |         T           |
+| F | T | T  | F  |    T    |     F      |         F           |
+| T | F | F  | T  |    F    |     T      |         F           |
+| T | T | F  | F  |    T    |     T      |         T           |
+
+b. $(p ⊕ q) ∧ (p ⊕ ¬q)$  
+
+|$p$|$q$|$¬q$|$(p ⊕ q)$|$(p ⊕ ¬q)$|$(p ⊕ q) ∧ (p ⊕ ¬q)$|
+|:-:|:-:|:--:|:--------:|:---------:|:-------------------:|
+| F | F | T  |    F     |     T     |          F          |
+| F | T | F  |    T     |     F     |          F          |
+| T | F | T  |    T     |     F     |          F          |
+| T | T | F  |    F     |     T     |          F          |
+
+
+c. $(p ↔ q) ∨ (¬q ↔ r)$  
+
+|$p$|$q$|$r$|$¬q$|$(p ↔ q)$|$(¬q ↔ r)$|$(p ↔ q) ∨ (¬q ↔ r)$|
+|:-:|:-:|:-:|:--:|:-------:|:--------:|:------------------:|
+| F | F | F | T  |    T    |    F     |        T           |
+| F | F | T | T  |    T    |    T     |        T           |
+| F | T | F | F  |    F    |    T     |        T           |
+| F | T | T | F  |    F    |    F     |        F           |
+| T | F | F | T  |    F    |    F     |        F           |
+| T | F | T | T  |    F    |    T     |        T           |
+| T | T | F | F  |    T    |    T     |        T           |
+| T | T | T | F  |    T    |    F     |        T           |
+
+
+d. $((p → q) → r) → s$
+
+|$p$|$q$|$r$|$s$|$(p → q)$|$(p → q) → r$|$((p → q) → r) → s$|
+|:-:|:-:|:-:|:-:|:-------:|:-----------:|:-----------------:|
+| F | F | F | F |    T    |      F      |        T          |
+| F | F | F | T |    T    |      F      |        T          |
+| F | F | T | F |    T    |      T      |        F          |
+| F | F | T | T |    T    |      T      |        T          |
+| F | T | F | F |    T    |      F      |        T          |
+| F | T | F | T |    T    |      F      |        T          |
+| F | T | T | F |    T    |      T      |        F          |
+| F | T | T | T |    T    |      T      |        T          |
+| T | F | F | F |    F    |      T      |        F          |
+| T | F | F | T |    F    |      T      |        T          |
+| T | F | T | F |    F    |      T      |        F          |
+| T | F | T | T |    F    |      T      |        T          |
+| T | T | F | F |    T    |      F      |        T          |
+| T | T | F | T |    T    |      F      |        T          |
+| T | T | T | F |    T    |      T      |        F          |
+| T | T | T | T |    T    |      T      |        T          |
+
+e. $(p ∧ r ∧ s) ↔ (p ∨ q)$
+
+|$p$|$q$|$r$|$s$|$(p ∧ r ∧ s)$|$(p ∨ q)$|$(p ∧ r ∧ s) ↔ (p ∨ q)$|
+|:-:|:-:|:-:|:-:|:-----------:|:-------:|:----------------------:|
+| F | F | F | F |      F      |    F    |            T           |
+| F | F | F | T |      F      |    F    |            T           |
+| F | F | T | F |      F      |    F    |            T           |
+| F | F | T | T |      F      |    F    |            T           |
+| F | T | F | F |      F      |    T    |            F           |
+| F | T | F | T |      F      |    T    |            F           |
+| F | T | T | F |      F      |    T    |            F           |
+| F | T | T | T |      F      |    T    |            F           |
+| T | F | F | F |      F      |    T    |            F           |
+| T | F | F | T |      F      |    T    |            F           |
+| T | F | T | F |      F      |    T    |            F           |
+| T | F | T | T |      T      |    T    |            T           |
+| T | T | F | F |      F      |    T    |            F           |
+| T | T | F | T |      F      |    T    |            F           |
+| T | T | T | F |      F      |    T    |            F           |
+| T | T | T | T |      T      |    T    |            T           |
 
 ## q5
 
+a.  
+p = Smartphone B RAM > Smartphone A RAM  
+q = Smartphone B RAM > Smartphone C RAM  
+$p ∧ q = T$
+
+b.  
+p = Smartphone C ROM > Smartphone B ROM
+q = Smartphone C Camera Resolution > Smartphone B Camera Resolution
+$p ∨ q = T$
+
+c.  
+p = Smartphone B RAM > Smartphone A RAM  
+q = Smartphone B ROM > Smartphone A ROM 
+r = Smartphone B Camera Resolution > Smartphone A Camera Resolution
+$p ∧ q ∧ r = F$
+
+d.  
+p = Smartphone B RAM > Smartphone C RAM  
+q = Smartphone B ROM > Smartphone C ROM 
+r = Smartphone B Camera Resolution > Smartphone C Camera Resolution
+$(p ∧ q) → r = F$
+
+e.  
+p = Smartphone A Camera Resolution > Smartphone B Camera Resolution  
+q = Smartphone A Camera Resolution > Smartphone C Camera Resolution
+r = Smartphone A RAM > Smartphone B RAM
+s = Smartphone A RAM > Smartphone C RAM
+$(p ∧ q) → (r ∧ s) = F$
+
 ## q6
+
+a.  
+$p ∨ q ≡ q ∨ p$
+sentance is true as truth tables are identical
+
+|$p$|$q$|$p ∨ q$|$q ∨ p$|
+|:-:|:-:|:-----:|:-----:|
+| F | F |   F   |   F   |
+| F | T |   T   |   T   |
+| T | F |   T   |   T   |
+| T | T |   T   |   T   |
+
+b.  
+$p ↔ q ≡ ¬(p → q) ∧ (¬q → p)$
+sentance is not correct. This is because the truth tables for $p ↔ q$ and $¬(p → q) ∧ (¬q → p)$ are not identical
+
+|$p$|$q$|$¬q$|$p ↔ q$|$¬(p → q)$|$(¬q → p)$|$¬(p → q) ∧ (¬q → p)$|
+|:-:|:-:|:--:|:-----:|:--------:|:--------:|:-------------------:|
+| F | F | T  |   T   |    F     |    T     |          F          |
+| F | T | F  |   F   |    F     |    F     |          F          |
+| T | F | T  |   F   |    T     |    T     |          T          |
+| T | T | F  |   T   |    F     |    T     |          F          |
+
+
+c.  
+$p ∨ q ≡ ¬p → q$
+sentance is true as truth tables are identical
+
+|$p$|$q$|$¬p$|$p ∨ q$|$¬p → q$|
+|:-:|:-:|:--:|:-----:|:------:|
+| F | F | T  |   F   |   F    |
+| F | T | T  |   T   |   T    |
+| T | F | F  |   T   |   T    |
+| T | T | F  |   T   |   T    |
 
 ## q7
 
+p = customer’s insurance premium payment DOES arrive by the deadline
+q = email reminder is sent
+
+original sentance = when $¬p$, $q$  
+= $¬p → q$
+
+**Converse** : swap left and right hand sides
+**Contrapositive** : swap left and right hand sides, NOT both sides
+**Inverse** : NOT both sides
+
+Therefore:  
+Converse: $q → ¬p$  
+When an email reminder is sent, customer’s insurance premium payment did not arrive by the deadline.  
+
+Contrapositive: $¬q → p$  
+When an email reminder is not sent, customer’s insurance premium payment did arrive by the deadline.  
+
+Inverse: $p → ¬q$
+When customer’s insurance premium payment DOES arrive by the deadline, an email reminder is not sent  
+
 ## q8
+
+$¬q ∧ (p → q) → ¬p$
+
+|$p$|$q$|$¬p$|$¬q$|$(p → q)$|$¬q ∧ (p → q)$|$¬q ∧ (p → q) → ¬p$|
+|:-:|:-:|:--:|:--:|:-------:|:------------:|:-----------------:|
+| F | F | T  | T  |    T    |      T       |         T         |
+| F | T | T  | F  |    T    |      F       |         T         |
+| T | F | F  | T  |    F    |      F       |         T         |
+| T | T | F  | F  |    T    |      F       |         T         |
+
+Since the Truth Table of $¬q ∧ (p → q) → ¬p$ is all True, $¬q ∧ (p → q) → ¬p$ is a Tautology
