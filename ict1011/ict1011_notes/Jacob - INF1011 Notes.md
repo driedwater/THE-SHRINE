@@ -722,7 +722,11 @@ V,N,Z,C flags
 Has way to store certain numbers  
 has useful numbers e.g. for standard incrementation  
 reduce requierment to store and fetch commonly used constants  
-useful for reducing cycles as part of fetch-decode-execute
+useful for reducing cycles as part of fetch-decode-execute  
+
+Constant Generator values:
+- #4, #8, #0, #1, #2, #-1
+- values not in this list ^^ need to be stored elsewhere in mem
 
 ### Working Registers
 
@@ -875,11 +879,69 @@ jump offset formula:
 ### Addressing modes
 
 Opcode tells ALU what op to do, **BUT** dependant on addressing mode  
-source operand : 7 addressing modes
-destination operand : 4 address modes
-operands can be in any memory space address (be aware of effects of things like R0-R3)
+source operand : 7 addressing modes  
+destination operand : 4 address modes  
+operands can be in any memory space address (be aware of effects of things like R0-R3)  
 Addressing modes selected by **As** and **Ad**
 
+SRC Modes (all registers):
+1. Rs - Register Mode
+   - use content of register as operand
+   - can be used for src and dst
+2. x(Rs) - Indexed Register
+   - +1 cycle (fetch,read offset) +1 cycle(exec,read value) for each use
+   - memory address of value is (x + value_in_Rs)
+   - value of x is stored in next mem address after inst addr
+   - Content of Rs not affected
+   - PC increment to next inst to exec
+   - Useful to access data in tables
+3. @Rs - Register Indirect (R1, R4-15)
+   - +1 cycle (fetch,read offset) +1 cycle(exec,read value) for each use
+   - only for src
+   - same as 0(Rs) but does not need to store offset value after inst
+   - use Register as mem addr for value
+4. @Rs+ - Indirect Auto-increment
+   - +1 cycle (fetch,read offset) +1 cycle(exec,read value) for each use
+   - only for src, only dual operand inst
+   - user Register as mem addr for value
+   - Increments the **SRC**
+     - if data value == byte: src+1
+     - if data value == word: src+2
+
+Additional SRC modes (for R0/R2):
+- label/symbol - symbolic mode, PC Relative
+  - ASM: x(PC)
+  - +1 cycle (fetch,read offset) +1 cycle(exec,read value) for each use
+  - mem addr of value is offset from PC
+  - does not change PC
+  - code composer calculates offset for label for you
+  - offset stored in mem addr after inst
+  - if used for src and dst, inst addr + 1 is src offset, inst addr +2 is dst offset
+- &label/&symbol - Absolute
+  - ASM: x(SR)
+  - +1 cycle (fetch,read offset) +1 cycle(exec,read value) for each use
+  - mem addr of value is stored as a constant after inst addr
+- #n - Immediate, <!-- @PC+ -->
+  - +1 cycle (fetch,read) for each use (if value not in constant generator)
+  - value of src is actual value to be used
+  - stored in mem addr after inst (unless value can be found ni constant generator)
+
+DST Modes (all registers):
+1. Rd - Register Mode
+2. x(Rd) - Indexed Register
+
+Additional DST modes (for R0/R2):
+- label - PC Relative, x(PC)
+- &label - Absolute, x(SR)
+
+MSP430 cycle usage:
+- fetch from mem : 1 cycle per mem addr (due to 16bit bus and word size mem)
+- decode instruction: 0 cycle (due to hardwiring)
+- read from register: 0 cycle
+- read from external memory: 1 cycle per address
+- write to register: 0 cycle
+- write to external memory: 1 cycle per address
+- ALU / adder = 0 cycles to perform function
 
 
 ## Low-level programming (Chpt 4-6)
