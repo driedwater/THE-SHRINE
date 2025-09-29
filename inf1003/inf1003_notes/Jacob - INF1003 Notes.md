@@ -23,7 +23,7 @@ for $\displaystyle\sum_{k=1}^5$, there are 5 terms,
 for $\displaystyle\sum_{k=0}^4$, there are also 5 terms  
 
 
-to find num of terms for$\displaystyle\sum_{k=n}^p$: $$n-p+1$$
+to find num of terms for$\displaystyle\sum_{k=n}^p$: $$p-n+1$$
  
 
 
@@ -37,7 +37,8 @@ $$= \frac{n(a_1+a_n)}{2}$$
 Geometric Series Summation  
 General Formula: 
 $$a_n = ar^{n-1}$$
-Summation Formula:  $$S_n = \frac{a(1 - r^n)}{1 - r} $$
+Summation Formula:  
+$$S_n = \frac{a(1 - r^n)}{1 - r}$$
 $$ = \frac{a(r^n)-1}{r-1} $$
 
 Infinite Summation 
@@ -109,7 +110,7 @@ $= \frac{100[1+100]}{2}$
 $= 5050$
 
 **Geometric Series Summation**  
-when n < ∞ :$$S_n = \frac{a(r^n-1)}{r-1} $$
+when n < ∞ : $$S_n = \frac{a(r^n-1)}{r-1}$$
 
 when n approach ∞:
 $$lim_{n->∞},\ \ \ S_n = \frac{a}{r-1}$$
@@ -185,8 +186,8 @@ $$LCM = \frac{a * b}{GCD}\ \ \ \ OR\ \ \ \ GCD = \frac{a * b}{LCM}$$
 ## Division
 
 a != 0  
-a divides b means b/a no remainder  
-a does not divide b means b/a have remainder
+a divides b means $\frac{b}{a}$ no remainder  
+a does not divide b means $\frac{b}{a}$ have remainder
 
 $$a = d*q+r$$
  a is dividen, d is divisor, q is quotient, r is remainder
@@ -625,6 +626,7 @@ The conjunction of $p$ and $q$, denoted by $p ∧ q$, is the proposition “$p$ 
 ways to say:
 - and
 - but, e.g. p but not r = p and not r
+- nevertheless e.g. not p nevertheless, r = not p and r
 ------------------
 
 ### Disjunction
@@ -1027,6 +1029,192 @@ Example
 
 ---------
 
+# Topic 5: Predicate Logic
+
+Predicate Logic: enables concise and general expressions
+
+Statements with variables may not be able to become a proposition.
+e.g. $x>4$ or $x=y+3$ or "Every student in my class had submitted at least one assignmnet"
+
+"Every student in my class had submitted at least one assignmnet"  
+This sentance requires one proposition per student  
+However, can say $P(x) =$ x has submitted an assignment
+
+the subject: x  
+the predicate (a property of x): had submitted an assignment
+
+The predicate now represents the whole student set
+
+once $x$ has a value, then can get a truth value
+
+## Predicate / Propositional Fucntion
+
+$$S(x): x\ is\ a\ student$$
+
+x is the variable, represent objs from a group/set
+
+S is a predicate, a property that is applied to x
+
+S() is a propositional function, applying the predicate to the variable, itself is NOT a propositions
+
+e.g. of usage  
+S(Alice): Alice is a student, aka True
+S(Abhishek): Ahbishek is NOT a student, aka False
+
+variables come from a domain, likE a type in programming
+e.g. All positive integers, all students in a class
+
+Consider:  
+"All students are hardworking"  
+"Alice is a student"
+Does it follow that: "Alice is hard-working"?
+
+## Quantifiers
+
+Quantifiers in Predicate logic
+1. Universal Quantifier, $∀$
+   - Truth Value using domain
+   - Truth value using counter example
+2. Existential Quantifier
+   - Truth value using domain
+
+Quantifier with restricted domain
+Precedence of Quantifier
+Negatin Quantified Expressions
+Nested Quantifiers
+   - Quantification of two variables
+
+### Universal Quantifier, $∀$
+
+$$∀x\ P(x)$$
+$$∀x\ P(x) = P(x_1) ∧ P(x_2) ∧ P(x_3) {...}$$
+
+read as "For all $x$, $P(x)$" or "For every $x$ , $P(x)$" or "Every x in [domain] [predicate]"
+
+e.g.  
+Every student in your class has taken a course in python  
+Every x in set of positive integers fulfills x > 0
+
+assert property is true for all values of x in particular domain (called domain of discourse / universe of discourse)
+
+The Universal quantification of $P(x)$ for a particular domain is the proposition that asserts that $P(x)$ is true for all values of x in this domain.  
+**BUT $∀x\ P(x)$ is NOT a proposition, it is a quantifier. BUT the quantifier can have a truth value**  
+can be thought of as a conjunction of all values of x. I.e
+
+$$∀x\ P(x) = P(1) ∧ P(2) ∧ P(3)$$
+
+If one value of P(x) is false, then $∀x\ P(x)$ will be false  
+
+truth value of $∀x\ P(x)$ will change when the domain changes.  
+Thus, domain must be specified when universal quantifier is used, otherwise universal quantifier is not defined
+
+![predicate-logic-domains](jacob-images/predicate-logic-domains.png)
+
+### Universal Quantifier, Counter examples
+
+A statement $∀x\ P(x)$ is false, where $P(x)$ is a propositional function, if and only if $P(x)$ is not always true when $x$ is in the domain
+
+$$∀x\ P(x) ↔ P(x)\ for\ all\ x$$
+
+### Existential Quantifier, $∃$
+
+$$∃x\ P(x)$$
+$$∃x\ P(x) = P(x_1) ∨ P(x_2) ∨ P(x_3) {...}$$
+
+read as "There exists an $x$, such that $P(x)$" or "For some $x$, $P(x)$"  
+
+**Same as $∀x\ P(x)$, $∃x\ P(x)$ is NOT a proposition, it is a quantifier. BUT the quantifier can have a truth value**  
+"There exists an element $x$ in the domain, such that $P(x)$ 
+
+truth value of $∃x\ P(x)$ will change when the domain changes.  
+Thus, domain must be specified when Existential quantifier is used, otherwise Existential quantifier is not defined
+
+
+## Quantifiers, Restricted Domains
+
+in the domain of all real numbers
+$$∀x < 0\ (x^2 > 0)$$
+$$∀y \neq 0\ (y^3 \neq 0)$$
+$$∃z > 0\ (z^2 = 2)$$
+
+in $∀x < 0\ (x^2 > 0)$, the domain is all real numbers where $x < 0$ and the predicate is $(x^2 > 0)$
+
+every non-zero real number y, y^3 is also a non-zero number
+
+there exists a positive real number z such that z^2 = 2
+
+## Logical Precedence of Quantifiers
+
+Both quantifiers have higher precedence than all logical operators  
+$$∀x P(x) ∨ Q(x)\ !\equiv ∀x (P(x) ∨ Q(x))$$
+$$∀x P(x) ∨ Q(x)\ \equiv (∀x P(x)) ∨ Q(x)$$
+
+## Negating Quantified Expressions
+
+$$¬∀x\ P(x) \equiv ∃x(¬P(x))$$
+$$¬∃x\ P(x) \equiv ∀x(¬P(x))$$
+
+E.g.  
+"Every student in your class has taken a course in Python."  
+P(x) = x has taken a course in Python  
+Domain = students in your class
+$∀x\ P(x)$
+Negate statement = $¬∀x\ P(x)$  
+"NOT Every student in your class has taken a course in Python."  
+AKA
+"There is a student in your class who has not taken a course in Python"  
+$∃x(¬P(x))$
+
+
+"There is a student in your class who has taken a course in Python."  
+P(x) = x has taken a course in Python  
+Domain = students in your class
+$∃x\ P(x)$
+Negate statement = $¬∃x\ P(x)$  
+"There is NOT student in your class who has taken a course in Python."  
+AKA
+"Every student in your class has NOT taken a course in Python"  
+$∀x(¬P(x))$
+
+$$¬∀x(x^2 > x) \equiv ∃x(x^2 \leq x)$$
+$$¬∃x(x^2=2) \equiv ∀x(x^2 \neq 2)$$
+
+## Nested Quantifiers
+
+![table-of-nested-quatifiers](jacob-images/table-of-nested-quatifiers.png)
+
+
+q1. domain is real numbers
+$$∀x∃y(x + y = 0)$$
+$$\equiv ∀x Q(x), Q(x) = ∃y(x + y = 0)$$
+
+read as "for every real number x, thereis a real number y such that $x + y = 0$"  
+i.e. for every real number x, there is an real number y that is the addative inverse of x
+
+q2. domain is real numbers
+$$∀x∀y(x + y = y + x)$$
+
+read as "x + y = y + x, for all x and y real numbers"
+
+q3. domain is real numbers
+$$∀x∀y((x > 0) ∧ (y < 0) → (xy < 0))$$
+
+read as "for every real number x and for every real number y, if $x > 0$ and $y < 0$, then $xy < 0$
+
+q4.
+let $Q(x,y)$ denote '$x + y = 0$'  
+What are the truth values of the following:
+$$∃y∀xQ(x,y)$$
+$$∀x∃yQ(x,y)$$
+
+$∃y∀xQ(x,y)$ = $∃y(∀xQ(x,y))$ = There is a real number $y$ such that for every real number $x$, $x + y = 0$.  
+Cannot be true as there is no singular real number $y$ such that $x + y = 0$ every real number $x$
+
+$∀x∃yQ(x,y)$ = $∀x(∃yQ(x,y))$ = For every real number $x$, there is a real number $y$ such that , $x + y = 0$.  
+Can be true as tor a given real number $x$, we can choose a real number $y$ such that $x + y = 0$
+
+
+-----------------------------------------------------------------
 
 # Tutorial 1 
 ## q1
@@ -1446,8 +1634,8 @@ last house will be unable to choose from a unique pair
 # Tutorial 4 
 ## q1
 
-a. Missing the final exam implies you will not pass the course
-b. Having Covid-19 or missing the final exam implies you will not pass the course
+a. Missing the final exam implies you will not pass the course  
+b. Having Covid-19 or missing the final exam implies you will not pass the course  
 
 |$p$|$q$|$r$|$¬r$|$p → ¬r$|$q → ¬r$|$(p → ¬r) ∨ (q→ ¬r)$|$(p ∨ q) → ¬r$ (wrong)|
 |---|---|---|----|--------|--------|--------------------|--------------|
@@ -1460,7 +1648,8 @@ b. Having Covid-19 or missing the final exam implies you will not pass the cours
 | T | T | F | T  |   T    |   T    |         T          |     T        |
 | T | T | T | F  |   F    |   F    |         F          |     F        |
 
-c. You will pass the course if you did not miss the exam or missed the exam due to having having COVID-19
+c. You will pass the course if you did not miss the exam or missed the exam due to having having COVID-19  
+
 |$p$|$q$|$r$|$¬q$|$p ∧ q$|$¬q ∧ r$|$(p ∧ q) ∨ (¬q ∧ r)$|
 |---|---|---|----|-------|--------|--------------------|
 | F | F | F | T  |   F   |   F    |         F          |
@@ -1474,8 +1663,9 @@ c. You will pass the course if you did not miss the exam or missed the exam due 
 
 ## q2
 
-a. $p ∧ ¬q$
-b. $(p ∧ ¬q) → r$
+a. $p ∧ ¬q$  
+b. $(p ∧ ¬q) → r$  
+
 |$p$|$q$|$r$|$¬q$|$(p ∧ ¬q)$|$(p ∧ ¬q) → r$|
 |---|---|---|----|----------|--------------|
 | F | F | F | T  |     F    |      T       |
@@ -1487,28 +1677,28 @@ b. $(p ∧ ¬q) → r$
 | T | T | F | F  |     F    |      T       |
 | T | T | T | F  |     F    |      T       |
 
-c. $(p ∧ q) → r$
+c. $(p ∧ q) → r$  
 
-d. $r ⇔ (p ∨ q)$
+d. $r ⇔ (p ∨ q)$  
 
 
 ## q3
 
 a.  
 p = get to top of Bukit Timah Hill  
-q = need to hike 2km
-if you want to get to top of Bukit Timah Hill, then you need to hike 2km
+q = need to hike 2km  
+if you want to get to top of Bukit Timah Hill, then you need to hike 2km  
 
 b.  
-p = drive more than 650 km   
+p = drive more than 650 km  
 q = need to buy gasoline  
 if you drive more than 650 km, then you will need to buy gasoline.
 
 c.  
-Xiaoming will go swimming unless the water is too cold.
-p = water is not too cold
-q = Xiaoming will go swimming
-if the water is not too cold, then Xiaoming will go swimming
+Xiaoming will go swimming unless the water is too cold.  
+p = water is not too cold  
+q = Xiaoming will go swimming  
+if the water is not too cold, then Xiaoming will go swimming  
 
 ## q4
 
@@ -1595,34 +1785,34 @@ q = Smartphone B RAM > Smartphone C RAM
 $p ∧ q = T$
 
 b.  
-p = Smartphone C ROM > Smartphone B ROM
-q = Smartphone C Camera Resolution > Smartphone B Camera Resolution
+p = Smartphone C ROM > Smartphone B ROM  
+q = Smartphone C Camera Resolution > Smartphone B Camera Resolution  
 $p ∨ q = T$
 
 c.  
-p = Smartphone B RAM > Smartphone A RAM  
-q = Smartphone B ROM > Smartphone A ROM 
-r = Smartphone B Camera Resolution > Smartphone A Camera Resolution
+p = Smartphone B RAM > Smartphone A RAM   
+q = Smartphone B ROM > Smartphone A ROM   
+r = Smartphone B Camera Resolution > Smartphone A Camera Resolution  
 $p ∧ q ∧ r = F$
 
 d.  
-p = Smartphone B RAM > Smartphone C RAM  
-q = Smartphone B ROM > Smartphone C ROM 
-r = Smartphone B Camera Resolution > Smartphone C Camera Resolution
+p = Smartphone B RAM > Smartphone C RAM   
+q = Smartphone B ROM > Smartphone C ROM   
+r = Smartphone B Camera Resolution > Smartphone C Camera Resolution  
 $(p ∧ q) → r = F$
 
 e.  
 p = Smartphone A Camera Resolution > Smartphone B Camera Resolution  
-q = Smartphone A Camera Resolution > Smartphone C Camera Resolution
-r = Smartphone A RAM > Smartphone B RAM
-s = Smartphone A RAM > Smartphone C RAM
+q = Smartphone A Camera Resolution > Smartphone C Camera Resolution  
+r = Smartphone A RAM > Smartphone B RAM  
+s = Smartphone A RAM > Smartphone C RAM  
 $(p ∧ q) → (r ∧ s) = F$
 
 ## q6
 
 a.  
-$p ∨ q ≡ q ∨ p$
-sentance is true as truth tables are identical
+$p ∨ q ≡ q ∨ p$  
+sentance is true as truth tables are identical  
 
 |$p$|$q$|$p ∨ q$|$q ∨ p$|
 |:-:|:-:|:-----:|:-----:|
@@ -1632,8 +1822,8 @@ sentance is true as truth tables are identical
 | T | T |   T   |   T   |
 
 b.  
-$p ↔ q ≡ ¬(p → q) ∧ (¬q → p)$
-sentance is not correct. This is because the truth tables for $p ↔ q$ and $¬(p → q) ∧ (¬q → p)$ are not identical
+$p ↔ q ≡ ¬(p → q) ∧ (¬q → p)$  
+sentance is not correct. This is because the truth tables for $p ↔ q$ and $¬(p → q) ∧ (¬q → p)$ are not identical  
 
 |$p$|$q$|$¬q$|$p ↔ q$|$¬(p → q)$|$(¬q → p)$|$¬(p → q) ∧ (¬q → p)$|
 |:-:|:-:|:--:|:-----:|:--------:|:--------:|:-------------------:|
@@ -1644,8 +1834,8 @@ sentance is not correct. This is because the truth tables for $p ↔ q$ and $¬(
 
 
 c.  
-$p ∨ q ≡ ¬p → q$
-sentance is true as truth tables are identical
+$p ∨ q ≡ ¬p → q$  
+sentance is true as truth tables are identical  
 
 |$p$|$q$|$¬p$|$p ∨ q$|$¬p → q$|
 |:-:|:-:|:--:|:-----:|:------:|
@@ -1656,15 +1846,15 @@ sentance is true as truth tables are identical
 
 ## q7
 
-p = customer’s insurance premium payment DOES arrive by the deadline
-q = email reminder is sent
+p = customer’s insurance premium payment DOES arrive by the deadline  
+q = email reminder is sent  
 
 original sentance = when $¬p$, $q$  
-= $¬p → q$
+= $¬p → q$  
 
-**Converse** : swap left and right hand sides
-**Contrapositive** : swap left and right hand sides, NOT both sides
-**Inverse** : NOT both sides
+**Converse** : swap left and right hand sides  
+**Contrapositive** : swap left and right hand sides, NOT both sides  
+**Inverse** : NOT both sides  
 
 Therefore:  
 Converse: $q → ¬p$  
@@ -1678,7 +1868,7 @@ When customer’s insurance premium payment DOES arrive by the deadline, an emai
 
 ## q8
 
-$¬q ∧ (p → q) → ¬p$
+$¬q ∧ (p → q) → ¬p$  
 
 |$p$|$q$|$¬p$|$¬q$|$(p → q)$|$¬q ∧ (p → q)$|$¬q ∧ (p → q) → ¬p$|
 |:-:|:-:|:--:|:--:|:-------:|:------------:|:-----------------:|
@@ -1687,4 +1877,4 @@ $¬q ∧ (p → q) → ¬p$
 | T | F | F  | T  |    F    |      F       |         T         |
 | T | T | F  | F  |    T    |      F       |         T         |
 
-Since the Truth Table of $¬q ∧ (p → q) → ¬p$ is all True, $¬q ∧ (p → q) → ¬p$ is a Tautology
+Since the Truth Table of $¬q ∧ (p → q) → ¬p$ is all True, $¬q ∧ (p → q) → ¬p$ is a Tautology  

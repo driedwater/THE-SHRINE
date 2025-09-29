@@ -1239,6 +1239,99 @@ Q3b
 49 = 0100 1001 = I
 
 
+## Tut3
+
+1.
+Assume MSP430
+a. R11 0x0034
+R0 = 0x4432
+
+b. R11 0x3002
+R0 = 0x4432
+
+c. R11 0xFFFF
+R0 = 0x4434
+
+d. R11 0xFACE
+R0 = 0x4434
+
+e. R11 0xFACE
+R0 = 0x4432
+
+f. R11 0xFACE
+R12 0x3004
+R0 = 0x4432
+
+g. R11 0x0078
+R0 = 0x4434
+
+b. 0x3002 =  0x78
+0x3003 = 0x00
+R0 = 0x4436
+
+2.
+a.
+ADD.W R10,R9
+0101 1010 0 0 00 1001
+0x5A09
+
+b.
+MOV.W #0,R9
+0100 0011 0 0 00 1001 
+0x4309
+
+c.
+MOV.B &5566H,R9
+0100 0010 0 1 01 1001
+0101 0101 0110 0110
+0x4259
+0x5566
+
+d,
+MOV.W &2233H,&5566h
+0100 0010 1 0 01 0010
+0010 0010 0011 0011
+0101 0101 0011 0011
+0x4292
+0x2233
+0x5566
+
+e.
+PUSH.W R1
+0001 0010 0 0 00 0001
+0x1201
+
+f.
+RETI
+0001 0011 0000 0000
+0x1300
+
+3.
+mov.w R10,R11
+size 1 word
+Fetch 1 cycle
+decode 0
+exec 0
+write 0
+
+mov.w @R10,R11
+size 1 word
+Fetch 2 cycle
+decode 0
+exec 1 cycle
+write 0
+
+a. need extra exec cycle as need read data from memory at addr (Value of R10)
+
+b.
+fig q3a uses 6 words 12 byte, and 9 cycles to complete
+fig q3b uses 4 words 8 byte and only 5 cycles to complete
+
+c.
+MSP430 reduces the size of the instruction from 2 word to 1 word with the constant generator and reduces the number of cycles to execute from 2 to 1.
+Without the constant generator, the instruction will need to store the value of #0 in the next mem addr after the inst.
+It reduces the exec cycles as reading from the constant generator uses 0 cycles but reading the value from memory uses 1 cycle
+
 ## Quiz 1:
 
 - 16bit RISC

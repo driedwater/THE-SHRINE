@@ -427,6 +427,147 @@ if combine both circuit, n-bit comparator done
 |     1     | 0 |  =   |
 |     1     | 1 |  >   |
 
+# Topic 4: Sequential Circuits
+
+Combinatorial: No clock, based on input
+
+Sequential: need clock, uses current input and previous inputs
+
+Latches / flip-flop like 1-bit memory
+
+Current / present state = $Q$ or $Q_n$
+Next / future state = $Q^+$ or $Q^+_n$
+
+Number in middle of latch box is possible stats, e.g. 0/1 means output is 0/1 or 1/0
+
+## SR Latch
+
+R: Reset, Q = 0
+S: Set, Q = 1
+
+Dual NOR: Active High
+|S|R|$Q^+$|Comments|
+|-|-|-|-|
+|0|0|Q|No Change|
+|0|1|0|Set|
+|1|0|1|Reset|
+|1|1|Undeterministic|Not allowed|
+
+Dual NAND: Active Low
+|S|R|$Q^+$||
+|-|-|-|-|
+|0|0|Undeterministic|Not allowed|
+|0|1|0|Set|
+|1|0|1|Reset|
+|1|1|Q|No Change|
+
+## D-latch
+
+Variation of SR latch
+
+Q follows D when EN=1
+
+|EN|D|$Q^+$|Q\`|Comments|
+|-|-|-|-|-|
+|0|0|Q|Q\`|No Change|
+|0|1|Q|Q\`|No Change|
+|1|0|0|1|Reset|
+|1|1|1|0|Set|
+
+## D Flip-Flop
+
+latch level-sensitive (aka input sensitive)
+Flip Flop edge-sensitive
+Flip Flop reduces noise from inputs like short spike on input
+
+PGT: Positive edge triggered: Q follows D on Rising edge (Clock 0 -> 1)
+NGT: Negative edge triggered: Q follows D on Falling edge (Clock 1 -> 0)
+
+D is not bound to clock. BUT D input is not async as any changes to the Flip-Flop only occur on clock change
+
+|CLK|D|$Q^+$|Q\`|Comments|
+|-|-|-|-|
+|↑|0|0|1|Reset|
+|↑|1|1|0|Set|
+
+![how-to-read-flip-flip](jacob-images/how-to-read-flip-flip.png)
+
+how to read:
+When see rising edge, check D and set Q to D
+
+## JK-Flip-Flop
+
+|J|K|$Q^+$$|
+|-|-||-|
+|0|0|↑|Q, No Change|
+|0|1|↑|1|
+|1|0|↑|0|
+|1|1|↑|Q, Toggle|
+
+CLR and PR are async inputs as the changes they make are done when inputs sent, not when clock change
+
+When CLR = 0, Q = 0
+When PR = 0, Q = 1
+
+## Propogation Delay
+
+![propogation-delay](jacob-images/propogation-delay.png)
+
+## Flip-Flop usage
+
+1. Memory
+Registers are groups of flip-flops connected to parallel data lines, store data till next clock pulse
+
+2. Freq Divider
+Chain JK flip-flop together in toggle mode
+each flip flop will half clock freq as is a base 2 system
+important for components that operate on different frequencies (Bluetooth, wifi, CPU, USB)
+
+3. Control Unit / Finite State Machines
+
+## Electronic implementation
+
+TRANSISTORS MAKE THIS WORK BABY
+
+CMOS (Complementary Metal Oxide Semiconductor)
+MOSFET (Metal Oxide Silicon Field Effect Transisitor)
+Best size as of 2025: 5nm
+
+CMOS uses MOSFETs
+
+Used to make basic logic gates
+
+PMOS: pull-up, when V = 0, Q = 1; when V = 1, Q = 0
+NMOS: pull-down, when V = 0, Q = 0; when V = 1, Q = 1
+
+![pmos-nmos-representation](jacob-images/pmos-nmos-representation.png)
+
+![cmos-to-logic-gates](jacob-images/cmos-to-logic-gates.png)
+
+## Hardware description lang (ASIC vs FPGA)
+
+FGPA = Field-programable gate array  
+Manufacturers: Xilinx, Altera, Acatel
+integrated circuit designed to be configured by the customer or designer after manufacturing
+Most designs are FPGA
+can be 'soft' upgraded
+often described as a ‘sea of gates’
+contains programable logic blocks with look-up-tables and flip-flops
+has programable routing to connect blocks together
+has I/O blocks for board-level connections
+
+ASIC = Application Specific Integrated Circuit
+Integrated device manufacturer (IDM) ASIC suppliers: TSMC, SMIC, Global Foundries, etc
+Fabless ASIC suppliers: Broadcom, Delta, Nvidia
+integrated circuit (IC) customized for a particular use
+
+will reach a point where using low level gates is too messy (i.e. 100 000 gate designs), so switch to Hardware description lang (HDL).
+HDL is abstract behavioral models, used to provide precise specs and framework for designers
+
+Similar idea to libraries in coding, build reuseable blocks to call on
+
+HDL langs: Verilog or VHDL
+
 # tut1
 
 2's complement trick
