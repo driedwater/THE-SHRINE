@@ -1346,3 +1346,53 @@ It reduces the exec cycles as reading from the constant generator uses 0 cycles 
 - 1234 stored at 2000H: 
 - - 2000H = 34H 
 - - 2001H = 12H
+
+## Lab 2
+
+1. Task 1
+   - mov.b # -1, R5 R5 = 0x00FF
+   - mov.w # -1, R6 R6 = 0xFFFF
+   - mov.w # -1234, R7 R7 = 0xEDCC
+   - mov.w # -1234h, R8 R8 = 0xEDCC
+   - mov.w # 'ABC', R9 R9 = ????
+2. Task 2
+   - mov.b # -1, R5 R5 = 0x00FF
+   - mov.w # -1, R6 R6 = 0xFFFF
+   - mov.w # -1234, R7 R7 = 0xFB2E         This is because no h suffix, so -1234 is decimal which gets converted to binary
+   - mov.w # -1234h, R8 R8 = 0xEDCC
+   - mov.w # 'ABC', R9 R9 = 0x4241         0x41 is 65 which in ASCII is A, wince is word only able to store 'AB', C is dropped
+3. Task 3
+    mov.b #01h, &2400h
+    mov.b #0Ah, &2401h
+    mov.w #1234h, &2402h
+    mov.w #5678h, &2403h
+    mov.w #9ABCh, &2404h
+
+    0x2405: 0x9A
+    0x2404: 0xBC
+    0x2403: 0x12 then 0x56
+    0x2402: 0x34 then 0x78
+    0x2401: 0x00
+    0x2400: 0x01 then 0x0A
+    
+4. Task 4
+    mov.b #01h, &2400h
+    mov.b #0Ah, &2401h
+    mov.w #1234h, &2402h
+    mov.w #5678h, &2403h
+    mov.w #9ABCh, &2404h
+
+    0x2405: 0x9A
+    0x2404: 0xBC
+    0x2403: 0x12 then 0x56
+    0x2402: 0x34 then 0x78
+    0x2401: 0x0A                Can address odd addr if doing byte op
+    0x2400: 0x01
+5. Task 5
+   add.w R1, R2 = 0101 0001 0000 0010, 2 byte
+   mov.w #1234h, R1 = 0100 0000 0011 0001    0001 0010 0011 0100, 4 byte
+   sub.b #5566h, &3000h = 1000 0000 1111 0010    0101 0101 0110 0110    0011 0000 0000 0000
+6. Task 6
+    add.w R1, R2 = 0101 0001 0000 0010, 2 byte, 0x5102
+   mov.w #1234h, R1 = 0100 0000 0011 0001    0001 0010 0011 0100, 4 byte, 0x4031 0x1234
+   sub.b #5566h, &3000h = 1000 0000 1111 0010    0101 0101 0110 0110    0011 0000 0000 0000, 6 byte, 0x80F2 0x5566 0x3000

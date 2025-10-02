@@ -551,6 +551,10 @@ The proposition $q → p$ is the **converse** of $p → q$.
 The proposition $¬q → ¬p$ is the **contrapositive** of $p → q$.  
 The proposition $¬p → ¬q$ is the **inverse** of $p → q$.  
 
+**Converse** : swap left and right hand sides
+**Contrapositive** : swap left and right hand sides, NOT both sides
+**Inverse** : NOT both sides
+
 **Precedence of logical connectives**  
 1. Rule 1: The negation operator (¬) is applied before all other logical operators.
    - So, $¬p ∧ q$ means $¬(p) ∧ q$.  
@@ -562,6 +566,8 @@ precedence than the conjunction ∧ and disjunction ∨ operators.
 
 |Connective            |Operator|Precedence|
 |:---------------------|:------:|:--------:|
+|Paranthesis|||
+|Quantifiers|||
 |Negation              |   ¬    |     1    |
 |Conjunction           |   ∧    |     2    |
 |Disjunction           |   ∨    |     3    |
@@ -576,7 +582,7 @@ if needed in exam, prof will write into the qn when to do XOR
 OTHER USEFUL EQUIVALENCES
 
 - Equivalences involving conditionals:
-- - $$p → q ≡ ¬q → ¬p$$ -(Proposition–Contrapositive; or Converse–Inverse)
+- - $$p → q ≡ ¬q → ¬p$$(Proposition–Contrapositive; or Converse–Inverse)
 - - $$p ∨ q ≡ ¬p → q$$
 - - $$p ∧ q ≡ ¬(p → ¬q)$$
 - - $$¬(p → q) ≡ p ∧ ¬q$$
@@ -1635,7 +1641,9 @@ last house will be unable to choose from a unique pair
 ## q1
 
 a. Missing the final exam implies you will not pass the course  
+ans: if miss then fail  
 b. Having Covid-19 or missing the final exam implies you will not pass the course  
+ans: if have covid, then fail or if miss, then fail
 
 |$p$|$q$|$r$|$¬r$|$p → ¬r$|$q → ¬r$|$(p → ¬r) ∨ (q→ ¬r)$|$(p ∨ q) → ¬r$ (wrong)|
 |---|---|---|----|--------|--------|--------------------|--------------|
@@ -1649,6 +1657,7 @@ b. Having Covid-19 or missing the final exam implies you will not pass the cours
 | T | T | T | F  |   F    |   F    |         F          |     F        |
 
 c. You will pass the course if you did not miss the exam or missed the exam due to having having COVID-19  
+Ans: either have coccid and miss or do not miss and pass
 
 |$p$|$q$|$r$|$¬q$|$p ∧ q$|$¬q ∧ r$|$(p ∧ q) ∨ (¬q ∧ r)$|
 |---|---|---|----|-------|--------|--------------------|
@@ -1663,8 +1672,20 @@ c. You will pass the course if you did not miss the exam or missed the exam due 
 
 ## q2
 
-a. $p ∧ ¬q$  
-b. $(p ∧ ¬q) → r$  
+'but not' is just 'and not'
+'still' is just 'and'
+'nevertheless' is just and
+
+'is sufficent' is just 'implies'
+'is necessary' is just 'implies'
+
+p is sufficent for q
+q is necessary for p
+
+a. $r ∧ ¬q$  
+ans: $r ∧ ¬q$  
+b. $(p ∧ ¬q) ∧ r$  
+ans: $(p ∧ ¬q) ∧ r$  
 
 |$p$|$q$|$r$|$¬q$|$(p ∧ ¬q)$|$(p ∧ ¬q) → r$|
 |---|---|---|----|----------|--------------|
@@ -1678,8 +1699,10 @@ b. $(p ∧ ¬q) → r$
 | T | T | T | F  |     F    |      T       |
 
 c. $(p ∧ q) → r$  
+ans: $(p ∧ q) → r$  
 
 d. $r ⇔ (p ∨ q)$  
+ans: $r ⇔ (q ∨ p)$  
 
 
 ## q3
@@ -1688,11 +1711,16 @@ a.
 p = get to top of Bukit Timah Hill  
 q = need to hike 2km  
 if you want to get to top of Bukit Timah Hill, then you need to hike 2km  
+ans:
+p = get to top of Bukit Timah Hill  
+q = need to hike 2km  
+If you get to the top of Bukit Timah Hill, then you must have hiked 2km
 
 b.  
 p = drive more than 650 km  
 q = need to buy gasoline  
 if you drive more than 650 km, then you will need to buy gasoline.
+correct
 
 c.  
 Xiaoming will go swimming unless the water is too cold.  
@@ -1700,29 +1728,40 @@ p = water is not too cold
 q = Xiaoming will go swimming  
 if the water is not too cold, then Xiaoming will go swimming  
 
+alt ans:
+If Xiaoming not swimming, water must be too cold
+
 ## q4
 
 a. $(p → q) ⇔ (¬p → ¬q)$  
 
 |$p$|$q$|$¬p$|$¬q$|$(p → q)$|$(¬p → ¬q)$|$(p → q) ⇔ (¬p → ¬q)$|
-|:-:|:-:|:--:|:--:|:-------:|:---------:|:--------------------:|
+|:-:|:-:|:--:|:--:|:-------:|:----------:|:-------------------:|
 | F | F | T  | T  |    T    |     T      |         T           |
 | F | T | T  | F  |    T    |     F      |         F           |
 | T | F | F  | T  |    F    |     T      |         F           |
 | T | T | F  | F  |    T    |     T      |         T           |
 
-b. $(p ⊕ q) ∧ (p ⊕ ¬q)$  
+ans$(p → q) ⇔ (¬q → ¬p)$ all true
+|$p$|$q$|$¬p$|$¬q$|$(p → q)$|$(¬q → ¬p)$|$(p → q) ⇔ (¬q → ¬p)$|
+|:-:|:-:|:--:|:--:|:-------:|:----------:|:-------------------:|
+| F | F | T  | T  |    T    |     T      |         T           |
+| F | T | T  | F  |    T    |     T      |         T           |
+| T | F | F  | T  |    F    |     F      |         T           |
+| T | T | F  | F  |    T    |     T      |         T           |
 
+b. $(p ⊕ q) ∧ (p ⊕ ¬q)$  
+correct
 |$p$|$q$|$¬q$|$(p ⊕ q)$|$(p ⊕ ¬q)$|$(p ⊕ q) ∧ (p ⊕ ¬q)$|
-|:-:|:-:|:--:|:--------:|:---------:|:-------------------:|
-| F | F | T  |    F     |     T     |          F          |
-| F | T | F  |    T     |     F     |          F          |
-| T | F | T  |    T     |     F     |          F          |
-| T | T | F  |    F     |     T     |          F          |
+|:-:|:-:|:--:|:--------:|:---------:|:--------------------:|
+| F | F | T  |    F     |     T     |          F           |
+| F | T | F  |    T     |     F     |          F           |
+| T | F | T  |    T     |     F     |          F           |
+| T | T | F  |    F     |     T     |          F           |
 
 
 c. $(p ↔ q) ∨ (¬q ↔ r)$  
-
+correct
 |$p$|$q$|$r$|$¬q$|$(p ↔ q)$|$(¬q ↔ r)$|$(p ↔ q) ∨ (¬q ↔ r)$|
 |:-:|:-:|:-:|:--:|:-------:|:--------:|:------------------:|
 | F | F | F | T  |    T    |    F     |        T           |
@@ -1736,7 +1775,7 @@ c. $(p ↔ q) ∨ (¬q ↔ r)$
 
 
 d. $((p → q) → r) → s$
-
+ccorrect
 |$p$|$q$|$r$|$s$|$(p → q)$|$(p → q) → r$|$((p → q) → r) → s$|
 |:-:|:-:|:-:|:-:|:-------:|:-----------:|:-----------------:|
 | F | F | F | F |    T    |      F      |        T          |
@@ -1757,7 +1796,7 @@ d. $((p → q) → r) → s$
 | T | T | T | T |    T    |      T      |        T          |
 
 e. $(p ∧ r ∧ s) ↔ (p ∨ q)$
-
+correct
 |$p$|$q$|$r$|$s$|$(p ∧ r ∧ s)$|$(p ∨ q)$|$(p ∧ r ∧ s) ↔ (p ∨ q)$|
 |:-:|:-:|:-:|:-:|:-----------:|:-------:|:----------------------:|
 | F | F | F | F |      F      |    F    |            T           |
@@ -1779,29 +1818,29 @@ e. $(p ∧ r ∧ s) ↔ (p ∨ q)$
 
 ## q5
 
-a.  
+a. correct  
 p = Smartphone B RAM > Smartphone A RAM  
 q = Smartphone B RAM > Smartphone C RAM  
 $p ∧ q = T$
 
-b.  
+b. correct  
 p = Smartphone C ROM > Smartphone B ROM  
 q = Smartphone C Camera Resolution > Smartphone B Camera Resolution  
 $p ∨ q = T$
 
-c.  
+c. correct  
 p = Smartphone B RAM > Smartphone A RAM   
 q = Smartphone B ROM > Smartphone A ROM   
 r = Smartphone B Camera Resolution > Smartphone A Camera Resolution  
 $p ∧ q ∧ r = F$
 
-d.  
+d. correct  
 p = Smartphone B RAM > Smartphone C RAM   
 q = Smartphone B ROM > Smartphone C ROM   
 r = Smartphone B Camera Resolution > Smartphone C Camera Resolution  
 $(p ∧ q) → r = F$
 
-e.  
+e. correct  
 p = Smartphone A Camera Resolution > Smartphone B Camera Resolution  
 q = Smartphone A Camera Resolution > Smartphone C Camera Resolution  
 r = Smartphone A RAM > Smartphone B RAM  
@@ -1810,7 +1849,7 @@ $(p ∧ q) → (r ∧ s) = F$
 
 ## q6
 
-a.  
+a. correct, is an example of commutative law  
 $p ∨ q ≡ q ∨ p$  
 sentance is true as truth tables are identical  
 
@@ -1821,7 +1860,7 @@ sentance is true as truth tables are identical
 | T | F |   T   |   T   |
 | T | T |   T   |   T   |
 
-b.  
+b. correct. Cannot use laws since laws are for and or nto only  
 $p ↔ q ≡ ¬(p → q) ∧ (¬q → p)$  
 sentance is not correct. This is because the truth tables for $p ↔ q$ and $¬(p → q) ∧ (¬q → p)$ are not identical  
 
@@ -1833,7 +1872,7 @@ sentance is not correct. This is because the truth tables for $p ↔ q$ and $¬(
 | T | T | F  |   T   |    F     |    T     |          F          |
 
 
-c.  
+c. correct, no law as is implication  
 $p ∨ q ≡ ¬p → q$  
 sentance is true as truth tables are identical  
 
@@ -1845,6 +1884,8 @@ sentance is true as truth tables are identical
 | T | T | F  |   T   |   T    |
 
 ## q7
+
+correct
 
 p = customer’s insurance premium payment DOES arrive by the deadline  
 q = email reminder is sent  
@@ -1859,14 +1900,19 @@ original sentance = when $¬p$, $q$
 Therefore:  
 Converse: $q → ¬p$  
 When an email reminder is sent, customer’s insurance premium payment did not arrive by the deadline.  
+Ans: if sent, then payment did not arrive on time
 
 Contrapositive: $¬q → p$  
 When an email reminder is not sent, customer’s insurance premium payment did arrive by the deadline.  
+Ans: If not sent, payment arrive on time
 
 Inverse: $p → ¬q$
 When customer’s insurance premium payment DOES arrive by the deadline, an email reminder is not sent  
+Ans: If payment arrives on time, then email not sent
 
 ## q8
+
+correct
 
 $¬q ∧ (p → q) → ¬p$  
 
@@ -1878,3 +1924,19 @@ $¬q ∧ (p → q) → ¬p$
 | T | T | F  | F  |    T    |      F       |         T         |
 
 Since the Truth Table of $¬q ∧ (p → q) → ¬p$ is all True, $¬q ∧ (p → q) → ¬p$ is a Tautology  
+
+# Tutorial 5
+
+## q1
+|Predicate|True/False/Nether|Explanation|
+|:-------:|:---------------:|:---------:|
+|a. ¬𝑃𝑟𝑖𝑚𝑒(10) ∨ 𝐼𝑛(10,5,20)|True|¬𝑃𝑟𝑖𝑚𝑒(10) = True, True ∨ anything = True|
+|b. ∃𝑛𝑃𝑟𝑖𝑚𝑒(𝑛)|True|Domain given and Prime(2) = True|
+|c. ∃𝑛¬𝑃𝑟𝑖𝑚𝑒(𝑛)|True|Domain given and ¬Prime(4) = True|
+|d. ∀𝑛𝑃𝑟𝑖𝑚𝑒(𝑛)|False|Domain given but Prime(4) = False|
+|e. ∀𝑛¬𝑃𝑟𝑖𝑚𝑒(𝑛)|False|Domain given but ¬Prime(2) = False|
+|f. ¬∀𝑛𝑃𝑟𝑖𝑚𝑒(𝑛)|True|Domain given and $¬∀n\ Prime(n) \equiv ∃n(¬Prime(n))$, ∃𝑛¬𝑃𝑟𝑖𝑚𝑒(𝑛) proven true in part c.|
+|g. ∀𝑛(𝐼𝑛(𝑛, 1,3) → 𝑃𝑟𝑖𝑚𝑒(𝑛))|True|Domain Given, when n!=2, 𝐼𝑛(𝑛, 1,3) = false, 𝐼𝑛(𝑛, 1,3) → 𝑃𝑟𝑖𝑚𝑒(𝑛) = true. When n = 2, 𝐼𝑛(𝑛, 1,3) = true an 𝑃𝑟𝑖𝑚𝑒(𝑛) = true.|
+|h. ∀𝑛(𝐼𝑛(𝑛, 8,10) → 𝑃𝑟𝑖𝑚𝑒(𝑛))|False|Domain given but when n=9, 𝐼𝑛(𝑛, 8,10) =True but 𝑃𝑟𝑖𝑚𝑒(𝑛) = False, thus 𝐼𝑛(𝑛, 8,10) → 𝑃𝑟𝑖𝑚𝑒(𝑛) = False|
+|i. ∀𝑛(𝐼𝑛(𝑛, 𝑎, 𝑏) → ¬𝑃𝑟𝑖𝑚𝑒(𝑛)), Where 𝑎 and 𝑏 are integer smaller than 10|||
+||||
