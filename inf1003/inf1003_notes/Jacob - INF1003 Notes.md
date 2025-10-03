@@ -643,6 +643,7 @@ Let $p$ and $q$ be propositions.
 The disjunction of $p$ and $q$, denoted by $p ∨ q$, is the
 proposition “p or q”.  
 ∨: called "vee"
+
 ------------------
 
 ### Exclusive Disjunction
@@ -864,6 +865,7 @@ let $p$ be "shape is square"
 let $q$ be "shape is rectangle"
 
 |$p$|$q$|$p → q$|Reason|
+|---|---|-------|------|
 | F | F |   T   |arbitrary shape is neither (maybe)|
 | F | T |   T   |arbitrary shape is rectangle (maybe)|
 | T | F |   F   |arbitrary shape is square and not rectangle (false)|
@@ -872,6 +874,7 @@ let $q$ be "shape is rectangle"
 CONVERSE  
 if shape is rectangle, then shape is square
 |$p$|$q$|$q → p$|Reason|
+|---|---|-------|------|
 | F | F |   T   |arbitrary shape is neither (maybe)|
 | F | T |   F   |arbitrary shape is rectangle but not square (false)|
 | T | F |   T   |true because in this case p is true if q. Since q is F, does not matter what p is|
