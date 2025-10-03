@@ -442,24 +442,24 @@ Number in middle of latch box is possible stats, e.g. 0/1 means output is 0/1 or
 
 ## SR Latch
 
-R: Reset, Q = 0
+R: Reset, Q = 0  
 S: Set, Q = 1
 
 Dual NOR: Active High
-|S|R|$Q^+$|Comments|
-|-|-|-|-|
-|0|0|Q|No Change|
-|0|1|0|Set|
-|1|0|1|Reset|
+|S|R|     $Q^+$     |  Comments |
+|-|-|---------------|-----------|
+|0|0|       Q       | No Change |
+|0|1|       0       |    Set    |
+|1|0|       1       |   Reset   |
 |1|1|Undeterministic|Not allowed|
 
 Dual NAND: Active Low
-|S|R|$Q^+$||
-|-|-|-|-|
+|S|R|     $Q^+$     | Comments  |
+|-|-|---------------|-----------|
 |0|0|Undeterministic|Not allowed|
-|0|1|0|Set|
-|1|0|1|Reset|
-|1|1|Q|No Change|
+|0|1|       0       |    Set    |
+|1|0|       1       |   Reset   |
+|1|1|       Q       | No Change |
 
 ## D-latch
 
@@ -467,28 +467,28 @@ Variation of SR latch
 
 Q follows D when EN=1
 
-|EN|D|$Q^+$|Q\`|Comments|
+|EN|D|$Q^+$|$\bar{Q}^+$|Comments|
 |-|-|-|-|-|
-|0|0|Q|Q\`|No Change|
-|0|1|Q|Q\`|No Change|
+|0|0|Q|$\bar{Q}$|No Change|
+|0|1|Q|$\bar{Q}$|No Change|
 |1|0|0|1|Reset|
 |1|1|1|0|Set|
 
 ## D Flip-Flop
 
-latch level-sensitive (aka input sensitive)
-Flip Flop edge-sensitive
-Flip Flop reduces noise from inputs like short spike on input
+latch level-sensitive (aka input sensitive)  
+Flip Flop edge-sensitive (only change on clock edge)  
+Flip Flop reduces noise from inputs like short spike on input  
 
-PGT: Positive edge triggered: Q follows D on Rising edge (Clock 0 -> 1)
+PGT: Positive edge triggered: Q follows D on Rising edge (Clock 0 -> 1)  
 NGT: Negative edge triggered: Q follows D on Falling edge (Clock 1 -> 0)
 
 D is not bound to clock. BUT D input is not async as any changes to the Flip-Flop only occur on clock change
 
-|CLK|D|$Q^+$|Q\`|Comments|
-|-|-|-|-|
-|↑|0|0|1|Reset|
-|↑|1|1|0|Set|
+|CLK|D|$Q$|$\bar{Q}$|Comments|
+| - |-| - |    -    |   -    |
+| ↑ |0| 0 |    1    |  Reset |
+| ↑ |1| 1 |    0    |  Set   |
 
 ![how-to-read-flip-flip](jacob-images/how-to-read-flip-flip.png)
 
@@ -497,12 +497,12 @@ When see rising edge, check D and set Q to D
 
 ## JK-Flip-Flop
 
-|J|K|$Q^+$$|
-|-|-||-|
+|J|K|CLK|$Q^+$|
+|-|-|-|-|
 |0|0|↑|Q, No Change|
 |0|1|↑|1|
 |1|0|↑|0|
-|1|1|↑|Q, Toggle|
+|1|1|↑|$\bar{Q}$, Toggle|
 
 CLR and PR are async inputs as the changes they make are done when inputs sent, not when clock change
 
@@ -516,12 +516,11 @@ When PR = 0, Q = 1
 ## Flip-Flop usage
 
 1. Memory
-Registers are groups of flip-flops connected to parallel data lines, store data till next clock pulse
+    - Registers are groups of flip-flops connected to parallel data lines, store data till next clock pulse
 
 2. Freq Divider
-Chain JK flip-flop together in toggle mode
-each flip flop will half clock freq as is a base 2 system
-important for components that operate on different frequencies (Bluetooth, wifi, CPU, USB)
+    - Chain JK flip-flop together in toggle mode each flip flop will half clock freq as is a base 2 system
+    - important for components that operate on different frequencies (Bluetooth, wifi, CPU, USB)
 
 3. Control Unit / Finite State Machines
 

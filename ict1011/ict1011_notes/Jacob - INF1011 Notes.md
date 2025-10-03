@@ -961,7 +961,6 @@ MSP430 cycle usage:
 
 Kinds of statements:
 1. Executable instructions
-   - 
 2. Assembler directives
 
 ### Why ASM
@@ -979,11 +978,211 @@ Kinds of statements:
 
 ### How ASM (ASM program development)
 
+![Developing-asm-program](jacob-images/Developing-asm-program.png)
+
 |Text editor|edit src file text, mnemonics (*.asm)|
 |:---------:|:-------------------:|
 |Assembler  |convert mnemonics in src file to machine code, produce obj file (*.obj)|
 |Linker     |combine several obj files into load module that contains machine code and address info (*.abs)|
 |Loader     |use load module address info, download instruction and data constants into appropriate memory areas for execution|
+
+### What ASM look like (Characteristics)
+
+Made up of:
+1. Executable Instructions
+  - valid inst for proccessor
+  - actually executed when program run
+2. Assembler directives
+  - tell assembler desired characteristics of program
+  - used during program assembly
+  - influencce the way program is loaded to memory
+  - generally start with a dot, e.g. .retain
+
+Example:  
+![asm-directive-example](jacob-images/asm-directive-example.png)
+
+|Layout|||||
+|-|-|-|-|-|
+|label|mnemonic|Operand List| Commments|
+|[label[:]]|mnemonic|[operand list]|[;comment]|
+
+MSP430 assembler
+- max 200 char per line, excess truncated
+
+### ASM Guidelines:
+1. all statements must begin with a label, a blank, an asterisk or semicolon
+2. Label optional, if used must be column 1
+3. 1+ blank to seperate fields, tab and space works
+4. Comments optional,Comments that begin in column 1 can begin with an asterisk or a semicolon (* or ;), but comments that begin in any other column must begin with a semicolon.
+5. mnemonic cannot begin in column 1
+
+### Label Field
+1. optional for all instruction and most directives
+2. must begin in ccolumn 1
+3. contain up to 128 alphanumeric char (A-Z, a-z, 0-9, _, and $)
+4. Case sensitive, 1st char not number
+5. after label can colon (:)
+6. label on line by itself is valid
+7. if no label, leave blank, semicolon or asterisk
+
+### Address and Value Labels
+- used as a reference to the address of an instruction or data (address label).
+- used with the .equ directive, it takes on the value of the equated constant (value label).
+![Addr-val-label](jacob-images/Addr-val-label.png)
+
+### Mnemonic Field
+- Machine-instruction mnemonic (such as ADD, MOV, JMP)
+- Assembler directive (such as .data, .list, .equ)
+- Macro directive (such as .macro, .var, .mexit) [Not covered in this mod]
+- Macro call [Not covered in this mod]
+- May require suffix
+
+### Operand Field
+- not required for all inst or directive
+- consits of symbols, constants, expressions
+- must seperate operands with commas
+- num operands needed depend on instruction
+
+- Constants in operand field treated as unsigned
+- Can be in dec, hex [0x, 0...h, 0...H], oct [0...Q, 0...], bin
+
+- Expressions
+- a constant, symbol or seriese of constants and symbols separated by arithmetic operators
+- assembler will calculate and convert to machine code. e.g. mov,w #1+2,R5 -> mov.w #3,R5
+- main factorsinfluence order of eval:
+  - Parentheses -> Precedencce groups -> left-to-right
+- ![precedence-table](jacob-images/precedence-table.png)
+
+### Comments
+- ignored by assembler
+- for humans, program documentation
+- use semicolon before comment
+
+### Symbols
+
+1. used as labels, constants, and substitution symbols
+2. symbol name is a string of up to 200 alphanumeric characters (A-Z, a-z, 0-9, $, and _)
+3. cannot contain embedded blanks
+4. first character cannot be a number
+5. case sensitive
+6. when used as label, becom symbollic addr associated with loc in program
+7. labels locally in file must be unique
+
+### Assembler Directivves
+
+1. supply data to program
+2. control assembly process
+
+Asm Dir enable
+- assemble code and data into specified sections
+- reserve space in mem for uninitialised vars
+- control appearance of listings
+- init mem
+- def global var
+- speccify which lib asm can get macros from
+- ++
+
+Common dir:
+1. select assembler section
+    - .sect, .text, .bss, .usecct
+2. def val for mem loc
+    - .byte, .word, .string, .space
+3. create symbol table entries
+    - .equ, .set
+4. def lib references and definitions
+    - .global, .ref, .def
+5. Specify end of program
+    - .end
+
+#### Selecting Assembler Section
+
+- block of code / data
+- occupies contiguous space in mem map
+- each sect has own Location Counter used to assign mem addr to program statement
+- types
+  1. Initalized sect w/ data or code (modal)
+  2. Uninitalized sect reserving space in meme map for uninitalized data (temporary)
+
+Location Counter
+- hold relative mem pos of an instruction in current sect
+- as inst in source module are being assembled, loc ccounter keeps track of current loc in mem
+- $(dollar sign) can be used as an operand to an inst to refer to the current val of loc counter
+
+When assembler sees:
+- .data, .sect, .text
+  - assembler stops assembling in current sect, begins assembling in indicated section
+  - data will not be lost on power down
+  - ensure you alloc these to ROM
+- .bss, .usect
+  - assembler *does not* end the current section, but simply escape from the current section temporarily
+  - uninitialized directives .bss and .usect can appear anywhere in an initialized section without affecting its contents.
+  - data in this will be lost on power down
+  - ensure you alloc these to RAM
+
+![sel-asm-sect](jacob-images/sel-asm-sect.png)
+
+#### Defining val for mem loc
+
+|Mnemonic and Syntax|Desc|
+|-|-|
+|.byte val$_1$[,..., val$_n$]|Init one or more successive bytes in current pos in section mem map|
+|.double *floating point val*|Init 48-bit MSP430 floating point constant in current pos in section mem map|
+|.float *floating point val*|Init 32-bit MSP430 floating point constant in current pos in section mem map|
+|*label* .space *Size in bytes*|Reserve *size* bytes in current set; note - a label points to beginning of reserved space|
+|.string *"string$_1$"*[,...,*"string$_n$"*]|Init one or more text strings in current pos in section mem map, each char convert to ASCII and stored 1st char lowest addr|
+|.word val$_1$[,..., val$_n$]|Init one or more 16-bit integers|
+|.bss *"label"* *size in bytes*|Init new secction called *"label"* with Size *size in bytes*, set *"label"* loc counter to next unreservved addr, and return back to previous section|
+|.usect *"label"* *size in bytes*|Init new section called *"label"* with Size *size in bytes*, set *"label"* loc counter to next unreservved addr, and return back to previous section|
+
+
+#### Creating symbol table entries
+
+|Mnemonic and Syntax|Desc|
+|-|-|
+|*symbol* .set *val*|def variable val|
+|*symbol* .equ *val*|def absolute constannt|
+
+FP .set R11 ; Ok
+_ mov.w @FP,R10 ; Ok
+FP .set R15 ; Ok
+count .equ 100/2 ; ok
+
+#### Defining lib references and definitions
+
+|Mnemonic and Syntax|Desc|
+|-|-|
+|.ref *symbol*|refer to routine(aka func)|
+|.def *symbol*|define routine|
+|.global *symbol*|def and ref|
+
+Lib
+- is a set of routines for specific domain application, e.g. math, GUI
+- use .ref dir to reference symbols outside a prog
+
+Lib routine invocation
+- labels for routines defined as .def
+- each lib routine conaians own symbol table
+- linker resolves external addr before creating exe
+
+.global decclare symbol to be external so is available to other modules at link time. Does def for defined symbols and ref for undefined symbols at the same time
+
+#### Specify end of prog
+
+|Mnemonic and Syntax|Desc|
+|-|-|
+|.end |tell assembler to stop assembling|
+
+optional directive
+shld be used as last source statement
+assembler ignores any source statements after .end
+can use when debugging
+
+### How ASM (Assembly Process)
+
+Pass 1: Find all label and addr for each label, store in symbol table
+Pass 2: convert inst to machin lang, using symbol table
+
+Asm inst have 1-to-1 correspondance from .asm to .obj
 
 # Computer Organisation
 
@@ -1396,3 +1595,7 @@ It reduces the exec cycles as reading from the constant generator uses 0 cycles 
     add.w R1, R2 = 0101 0001 0000 0010, 2 byte, 0x5102
    mov.w #1234h, R1 = 0100 0000 0011 0001    0001 0010 0011 0100, 4 byte, 0x4031 0x1234
    sub.b #5566h, &3000h = 1000 0000 1111 0010    0101 0101 0110 0110    0011 0000 0000 0000, 6 byte, 0x80F2 0x5566 0x3000
+
+
+## Lab 4
+
