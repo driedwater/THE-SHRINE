@@ -48,9 +48,10 @@ Note: When refering to info size, kilo is 1024. When refering to speeds e.g. sam
 - MSB = Most significant bit i.e. bit representing largest value
 - LSB = Least significant bit i.e. the ones bit
 
-0000 0000  
-^---------^  
-MSB----LSB
+|  0|0|0|0|0|0|0|0  | 
+|:-:|-|-|-|-|-|-|:-:| 
+|  ^|-|-|-|-|-|-|^  |  
+|MSB|-|-|-|-|-|-|LSB|
 
 ## Analogue to Digial Signal
 
@@ -62,9 +63,9 @@ Sampling vs quantization
 
 Nyquist Rate
 - Sampling frequency must be more than 2x max frequency of input.
-- f(sample) > 2x f(input)
-- f(sample) cannot be equals to 2x f(input).
-- If unlucky and f(sample)=2xf(input), possible to only sample the 0 value of the wave
+- $f(sample) > 2 * f(input)$
+- $f(sample)$ **cannot be equals to** $2 * f(input)$.
+- If unlucky and $f(sample) = 2 * f(input)$, possible to only sample the 0 value of the wave
 
 > Sampling rates
 >> 1s = 1Hz  
@@ -86,7 +87,7 @@ Usually 8, 10, 12, 16, 24
 ## Positional Number systems
 
 Decimal binary hexadecimal are positional number systems
-the position of each digit determines and represents a diffrent power of 10, 2 or 8
+the position of each digit determines and represents a diffrent power of 10, 2 or 8  
 You maybe able to determin which number system is being used based on which digits are present.
 e.g.
 - 90FE is cnfm hex
@@ -105,14 +106,17 @@ $1011.11 = 1*2^3 + 1*2^1 + 1*2^0 + 1*2^{-1} + 1*2^{-2}$
 Sign-magnitude representation
 - just means num is signed. does not tell you HOW it's signed
 
-n=bit sign-magnitude binary can rep values from -(2^n-1^-1) to +(2^n-1^-1)  
+n-bit sign-magnitude binary can rep values from $-(2^{n-1}-1)$ to $+(2^{n-1}-1)$  
 e.g. 8 bit binary therefore can store up to 7 bit of value  
-i.e. 127 +ve and -ve
+i.e. 127 +ve and -ve  
 also results in a +ve 0 and -ve 0 representation
 
 1's complement is the WEIRD way to sign and is not used in computers  
-the compleement of a binary digit is the invers of all the digits.  
-i.e 010 for 2 then 101 is -2  
+- the compleement of a binary digit is the invers of all the digits.  
+- i.e
+- 010 for 2
+- then 101 is -2
+
 still uses MSB to rep +ve and -ve numbers, 0 = +ve, 1 = -ve  
 1's complement more easy to use in circuits as you just NOT gate each binary digit.  
 to derive -ve number for 1's complement, find +ve value first, then invert all bits
@@ -121,7 +125,8 @@ to derive -ve number for 1's complement, find +ve value first, then invert all b
 - take the +ve value and invert bit like 1s complement
 - add 1
 - finish
-changes value range to -2^n-1^ to +(2^n-1^-1)
+
+changes value range to -2^n-1^ to +(2^n-1^-1)  
 removes -0 representation
 
 ## addition, sub traction and overflow
@@ -139,7 +144,7 @@ so you change carry flag to 1
 but since MSB is still negative, logic is correct so overflow flag is still 0
 _____________
 
-$$10001_2 + 1010_2 = [1]0011_2$$
+$$1001_2 + 1010_2 = [1]0011_2$$
 
 ^ in this case also run out of bits.  
 so you change carry flag to 1.  
@@ -147,20 +152,37 @@ since MSB is 0 but both initial values MSB was 1, logic has failed as output is 
 Thus, overflow flag must be changed to 1
 ______________
 
-$$[1]0011_2 - 0110_2 = 1101_2$$
+|       |$^2->^1$|$^2$|   |   |
+|:-----:|:------:|----| - | - |
+|~~[1]~~|    0   | 0  | 1 | 1 |
+|   -   |    0   | 1  | 1 | 0 |
+|       |    1   | 1  | 0 | 1 |
+
 ^ borrow imiginary bit, 3-6 = -3 so logic ok, no overflow  
 
 
-$$[1]0110_2 - 0011_2 = 0011_2$$
-^ borrow imiginary bit, 6-3 = 3 so logic ok, no overflow
 
-$$[1]1010_2 - 00011_2 = 0111_2$$
-  ????????????????
+|       |   |     | $^2$|$^2$|
+|:-----:|---|-----|  -  | -  |
+|       | 0 |~~1~~|~~1~~| 0  |
+|   -   | 0 |  0  |  1  | 1  |
+|       | 0 |  0  |  1  | 1  |
+
+^ 6-3 = 3 so logic ok, no overflow
 
 
-if number is positive, can extend leading bits with 0
-e.g. 0011 = 0000 0011
-if number is negative, can extend leading bits with 1
+|       |     |$^2->^1$| $^2$|$^2$|
+|:-----:|:---:|:------:|  -  | -  |
+|       |~~1~~|    0   |~~1~~| 0  |
+|   -   |  0  |    0   |  1  | 1  |
+|       |  0  |    1   |  1  | 1  |
+  
+^^ -6-3 = 7, logic fail, overflow
+
+
+if number is positive, can extend leading bits with 0  
+e.g. 0011 = 0000 0011  
+if number is negative, can extend leading bits with 1  
 e.g. 1001 = 1111 1001
 
 ## IEEE-754 Mantissa
@@ -171,9 +193,12 @@ $$(-1)^{sign} * 1.mantissa *2^{(exponent-127)}$$
 $25.75$ to IEEE-754  
 split decimal into whole num and fractional  
 whole: 25, fractional: 0.75  
-Find binary equivalent of fractional part $$ 0.75*2 = 1.5 \ \ \ -> (1)$$ $$ 0.5*2 = 1.0 \ \ \ -> (1)$$  
+Find binary equivalent of fractional part
+$$ 0.75*2 = 1.5 \ \ \ -> (1)$$
+$$ 0.5*2 = 1.0 \ \ \ -> (1)$$  
 binary equivalent: $11001.11_2$  
-move binary point to the **left** until you get $1.matissa$ $$11001.11 -> 1.100111$$  
+move binary point to the **left** until you get $1.matissa$
+$$11001.11 -> 1.100111$$  
 Note: Moved to left (4) times, this will be the Exponent  
 
 - Sign: is +ve so sign = 0  
@@ -187,7 +212,9 @@ _______
 $.75$ to IEEE-754  
 split decimal into whole num and fractional  
 whole: 0, fractional: 0.75  
-Find binary equivalent of fractional part $$ 0.75*2 = 1.5\ \ \ -> (1)$$ $$ 0.5*2 = 1.0\ \ \ \ -> (1) $$  
+Find binary equivalent of fractional part
+$$ 0.75*2 = 1.5\ \ \ -> (1)$$
+$$ 0.5*2 = 1.0\ \ \ -> (1)$$  
 binary equivalent: $0.11_2$  
 move binary point to the **right** until you get $1.mantissa$  
 $0.11 -> 1.1$  
@@ -197,7 +224,8 @@ Note Moved to right (1) times, This will be the exponent
 - Exponent : -1 = exp+127 => 126 = 10000011  
 
 NOTE: Exponent is unsigned.  
-Exponent is how many times you shift the binary point to the left, in this case moved right so is -1 and change exponent bias 127 to +
+Exponent is how many times you shift the binary point to the left,  
+in this case moved right so is -1 and change exponent bias 127 to +
 
 ## Gray code
 
@@ -225,8 +253,8 @@ Parity type is agreed between users before sending data
 if error detected, parity cannot recover the data.
 Parity can be added as LSB or MSB, depend on user agreement
 
-Even: 1011 011[1]
-Odd : 1011 011[0]
+Even: 1011 011[1] -> sum of 1's= 6  
+Odd : 1011 011[0] -> sum of 1's= 5
 
 Other error detection: Cyclic redundancy check (CRC), Hamming code
 
@@ -239,6 +267,10 @@ Logic circuits types:
 - - Output depends only on current inputs
 - Sequential
 - - Output depends not only on current inputs but past sequence of inputs
+
+ALU is Combinatorial circuit, doesnt use clock
+
+Control Unit and Registers are sequential circuits, uses clock
 
 Basic logic ops:
 - AND
@@ -283,143 +315,255 @@ $Z_{NOR} = \bar{A + B} =$
 1 NOR 0 = 0
 1 NOR 1 = 0
 
-![Base Gates](<../../inf1003/inf1003_notes/jacob-images/Base-Gates.png>)
+![Base Gates](<jacob-images/Base-Gates.png>)
 
 ## Boolean algebra Characteristics:
 
-Commutativity (flip inputs does not change outcome): x.y = y.x, x+y = y+x
-Associativity (grouping operations does not change outcome): (x.y).z = x.(y.z), (x+y)+z = x+(y+z)
-Distributivity ()
+Will be in quick reference sheet
+
+![boolean-algebra-characteristics](jacob-images/boolean-algebra-characteristics.png)
+
+## Propogation delay
+
+takes time for electricity to travel through circuit, time taken ($\Delta t$)
+
+## Canonical form
+
+is 
+
+## Sum of Product
+basically "sum" (basically or) all options in truth table that output 1 (i.e. maxterm)  
+each input needs to be a one in the equations.  
+
+e.g.  
+A = 0  
+B = 1  
+C = 1  
+equation part for this line in truth table is \'ABC
+e.g.
+ABC and A\`BC give 1, then $ABC\ OR\ A\`BC$ = $ABC + A\`BC$
+
+## Product of Sum
+basically "multiply" (basically and) all options in truth table that output 0 (i.e. minterm)  
+e.g.  
+ABC and A\`BC give 0, then $ABC\ AND\ \`ABC$ = $ABC . \`ABC$
+
+## Ripple (carry) adder
+
+made of half adder and full adder  
+2x half adder = full adder
+![adders](jacob-images/adders.png)  
+![truth-table-to-circuit-1](jacob-images/truth-table-to-circuit-1.png)  
+![truth-table-to-circuit-2](jacob-images/truth-table-to-circuit-2.png)  
 
 
+chaining multiple full adders together can add N-bit numbers  
+each carry bit "ripples" to next full adder
+slow for many bits
+- Since the carry may need to be propagated along the longest path from the LSB to
+the MSB, the delay is proportional to the bit length to be added.
 
-# tut1
+![ripple-example](jacob-images/ripple-example.png)  
+![alt text](jacob-images/ripple-longest-path.png)
 
-2's complement trick
-find last instance of 1, all 0 right of last instance of 1 remain as 0, flip all bits left of last instance 1 except MSB
+## MUX and DEMUX
 
-e.g.:
-1010 0100
-[1]010 0[1]00
-[1]101 1[1]00 [end]
+MUX is choose 1 of many and send through one output  
 
-q1a
+![mux-representations](jacob-images/mux-representations.png)
 
-2v/8 setp cus 2^3
+DEMUX is choose 1 of many output using an isolated select input and send data from single input
 
-0, 0.5, 1.5, 1.75, 1.75
+![demux](jacob-images/demux.png)
 
-never hits max 2v.
-because need to keeep 000 for 0V, no choice have to give up 2v
-considered boundary case
+N-Multiplexer  
+has $2^n$ inputs  
+has n select(address) inputs
+has 1 output
 
-error
-0.001, 0.011, 0.068, 0.053, 0.146
+high level multiplexer can be constructed using lower level multiplexer
 
-standard choice: Vmax/2^n
-if req to include Vmax: Vmax/(2^n -1)
-other possibility: 000 = midpoint of step between (0 and 0.25)
+for multiplexer gate, sel = 0 is choose top, sel = 1 is choose bottom
 
-q1b
+multiplexer equation:
+use control inputs and which input selected  
+for which input selected, assume val is 1
+e.g.  
+![MUX-equation](jacob-images/MUX-equation.png)
 
-sum all absolute / num samples
+multiplexer boolean:  
+![multiplexer-boolean](jacob-images/multiplexer-boolean.png)
 
-max error is (v/2^n)/2 as max error is when voltage is exactly in middle of diff between step values
+## Logic Shift
 
-q1c
+SL = Shift left, multiply by 2
+SR = Shift Right, divide by 2
 
-(2Volts/2^10) /2 = 0.97mV
+does not preserve sign bit  
+once shifted, vacant positions filled usually by 0
 
-q1d
-increase ADC bits increase resolution but also increase overall file size
+![SL](jacob-images/SL.png) ![SR](jacob-images/SR.png)
 
+![SL-mux](jacob-images/SL-mux.png)
 
-q2a
-120(dec) = 1000 0000
-NOTE need to delcare somehow that is a positive number. since by default is 2's complement
-e.g. 0 1000 0000 or 1000 000 (unsigned)
+## Comparator
 
-q2b
-by default is 2's complement
-neg representation 1010 1011 0001 0010 1110 1111 (bin)
-2's complement pos num: 1101 0100 1110 1101 0001 0001 (bin)
+used to check if bit is =, > or <
 
--5 565 713 (dec)
+![1bit-comparator](jacob-images/1bit-comparator.png)
 
-q2c
-164 (unsigned), -36 (sign magnitude), -91(1's complement), -92(2's complement)  (all dec)
-need declare which is which
+n-bit comparator:  
+2 ways to do:  
+- binary subtraction: outputs: >= or <  
+- XOR each bit or inputs then OR all XOR ouput: outputs: =, !=  
 
-q2d
-11 1011(sign-magnitude), 10 0100(1's complement), 10 0101(2's complement)  (all bin)
-need declare which is which
+![comparator-adder](jacob-images/comparator-adder.png) ![comparator-xor](jacob-images/comparator-xor.png)
 
-q2e
-9.375 
+if combine both circuit, n-bit comparator done
+|Subtraction|XOR|result|
+|:---------:|:-:|:----:|
+|     0     | 0 |  x   |
+|     0     | 1 |  <   |
+|     1     | 0 |  =   |
+|     1     | 1 |  >   |
 
-q2f
-0001 0100 0100.1111 (unsigned bin)
+# Topic 4: Sequential Circuits
 
-q2g
-0101 0011 1001. 0101 0111 (BCD)
+Combinatorial: No clock, based on input
 
-q2h
-0 1000 0101 000 0000 0100 0000 0000 0000 (bin floating point)
-word ver:
-42804000 (hex)
+Sequential: need clock, uses current input and previous inputs
 
+Latches / flip-flop like 1-bit memory
 
-q2i
-C46A 0840(hex) = 1100 0100 0110 1010 0000 1000 0100 0000 (bin)
-[1][100 0100 0][110 1010 0000 1000 0100 0000]
+Current / present state = $Q$ or $Q_n$
+Next / future state = $Q^+$ or $Q^+_n$
 
-[100 0100 0] = 136 raw value
-exponent bias -127 = 9
-mantissa = 1.[110 1010 0000 1000 0100 0000]
-shift bits right (since is decoding) by exponent times
-1110 1010 00.00 1000 0100 0000
-936.12890625 (dec)
-rmbr add neg sign because sign bit is 1
--936.12890625 (dec)
+Number in middle of latch box is possible stats, e.g. 0/1 means output is 0/1 or 1/0
 
-q3a
-89  = 0101 1001
+## SR Latch
 
-27  = 0001 1011
--27 = 1110 0100 +1
-    = 1110 0101
+R: Reset, Q = 0  
+S: Set, Q = 1
 
-89-(27)
-0101 1001
-0001 1011
-0010 1100 -- result ok
+Dual NOR: Active High
+|S|R|     $Q^+$     |  Comments |
+|-|-|---------------|-----------|
+|0|0|       Q       | No Change |
+|0|1|       0       |    Set    |
+|1|0|       1       |   Reset   |
+|1|1|Undeterministic|Not allowed|
 
-89+(-27)
-   0101 1001
-   1110 0101
-[1]0011 1110--incorrect as carry not shown
+Dual NAND: Active Low
+|S|R|     $Q^+$     | Comments  |
+|-|-|---------------|-----------|
+|0|0|Undeterministic|Not allowed|
+|0|1|       0       |    Set    |
+|1|0|       1       |   Reset   |
+|1|1|       Q       | No Change |
 
-q3b
-44 = 0010 1100
--44 = 1101 0011 +1
-    = 1101 0100
-99 = 0110 0011
--99 = 1001 1100 +1
-    = 1001 1101
+## D-latch
 
--44 - (+99)
-1101 0100
-0110 0011
-0111 0001 --  incorrect as is positive, overflow
+Variation of SR latch
 
--44 + (-99)
-1101 0100
-1001 1101
-[1]0111 0001 --- added extra 1, carry and overflow
+Q follows D when EN=1
 
-q4
-decimal x: 86, 126, 6, 0, -128
-decimal y: 86, 3, -6, -8, -1
-binary z: 1010 1100, 1000 0001, 0000 0000, 1111 1000, 0111 1111
-decimal z: -86,-127, 0, -8, 127
-overflow: yes,yes,no,no,yes
+|EN|D|$Q^+$|$\bar{Q}^+$|Comments|
+|-|-|-|-|-|
+|0|0|Q|$\bar{Q}$|No Change|
+|0|1|Q|$\bar{Q}$|No Change|
+|1|0|0|1|Reset|
+|1|1|1|0|Set|
+
+## D Flip-Flop
+
+latch level-sensitive (aka input sensitive)  
+Flip Flop edge-sensitive (only change on clock edge)  
+Flip Flop reduces noise from inputs like short spike on input  
+
+PGT: Positive edge triggered: Q follows D on Rising edge (Clock 0 -> 1)  
+NGT: Negative edge triggered: Q follows D on Falling edge (Clock 1 -> 0)
+
+D is not bound to clock. BUT D input is not async as any changes to the Flip-Flop only occur on clock change
+
+|CLK|D|$Q$|$\bar{Q}$|Comments|
+| - |-| - |    -    |   -    |
+| ↑ |0| 0 |    1    |  Reset |
+| ↑ |1| 1 |    0    |  Set   |
+
+![how-to-read-flip-flip](jacob-images/how-to-read-flip-flip.png)
+
+how to read:
+When see rising edge, check D and set Q to D
+
+## JK-Flip-Flop
+
+|J|K|CLK|$Q^+$|
+|-|-|-|-|
+|0|0|↑|Q, No Change|
+|0|1|↑|1|
+|1|0|↑|0|
+|1|1|↑|$\bar{Q}$, Toggle|
+
+CLR and PR are async inputs as the changes they make are done when inputs sent, not when clock change
+
+When CLR = 0, Q = 0
+When PR = 0, Q = 1
+
+## Propogation Delay
+
+![propogation-delay](jacob-images/propogation-delay.png)
+
+## Flip-Flop usage
+
+1. Memory
+    - Registers are groups of flip-flops connected to parallel data lines, store data till next clock pulse
+
+2. Freq Divider
+    - Chain JK flip-flop together in toggle mode each flip flop will half clock freq as is a base 2 system
+    - important for components that operate on different frequencies (Bluetooth, wifi, CPU, USB)
+
+3. Control Unit / Finite State Machines
+
+## Electronic implementation
+
+TRANSISTORS MAKE THIS WORK BABY
+
+CMOS (Complementary Metal Oxide Semiconductor)
+MOSFET (Metal Oxide Silicon Field Effect Transisitor)
+Best size as of 2025: 5nm
+
+CMOS uses MOSFETs
+
+Used to make basic logic gates
+
+PMOS: pull-up, when V = 0, Q = 1; when V = 1, Q = 0
+NMOS: pull-down, when V = 0, Q = 0; when V = 1, Q = 1
+
+![pmos-nmos-representation](jacob-images/pmos-nmos-representation.png)
+
+![cmos-to-logic-gates](jacob-images/cmos-to-logic-gates.png)
+
+## Hardware description lang (ASIC vs FPGA)
+
+FGPA = Field-programable gate array  
+Manufacturers: Xilinx, Altera, Acatel
+integrated circuit designed to be configured by the customer or designer after manufacturing
+Most designs are FPGA
+can be 'soft' upgraded
+often described as a ‘sea of gates’
+contains programable logic blocks with look-up-tables and flip-flops
+has programable routing to connect blocks together
+has I/O blocks for board-level connections
+
+ASIC = Application Specific Integrated Circuit
+Integrated device manufacturer (IDM) ASIC suppliers: TSMC, SMIC, Global Foundries, etc
+Fabless ASIC suppliers: Broadcom, Delta, Nvidia
+integrated circuit (IC) customized for a particular use
+
+will reach a point where using low level gates is too messy (i.e. 100 000 gate designs), so switch to Hardware description lang (HDL).
+HDL is abstract behavioral models, used to provide precise specs and framework for designers
+
+Similar idea to libraries in coding, build reuseable blocks to call on
+
+HDL langs: Verilog or VHDL
+

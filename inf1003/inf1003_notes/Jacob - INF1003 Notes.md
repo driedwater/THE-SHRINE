@@ -23,7 +23,7 @@ for $\displaystyle\sum_{k=1}^5$, there are 5 terms,
 for $\displaystyle\sum_{k=0}^4$, there are also 5 terms  
 
 
-to find num of terms for$\displaystyle\sum_{k=n}^p$: $$n-p+1$$
+to find num of terms for$\displaystyle\sum_{k=n}^p$: $$p-n+1$$
  
 
 
@@ -37,7 +37,8 @@ $$= \frac{n(a_1+a_n)}{2}$$
 Geometric Series Summation  
 General Formula: 
 $$a_n = ar^{n-1}$$
-Summation Formula:  $$S_n = \frac{a(1 - r^n)}{1 - r} $$
+Summation Formula:  
+$$S_n = \frac{a(1 - r^n)}{1 - r}$$
 $$ = \frac{a(r^n)-1}{r-1} $$
 
 Infinite Summation 
@@ -109,7 +110,7 @@ $= \frac{100[1+100]}{2}$
 $= 5050$
 
 **Geometric Series Summation**  
-when n < ∞ :$$S_n = \frac{a(r^n-1)}{r-1} $$
+when n < ∞ : $$S_n = \frac{a(r^n-1)}{r-1}$$
 
 when n approach ∞:
 $$lim_{n->∞},\ \ \ S_n = \frac{a}{r-1}$$
@@ -185,8 +186,8 @@ $$LCM = \frac{a * b}{GCD}\ \ \ \ OR\ \ \ \ GCD = \frac{a * b}{LCM}$$
 ## Division
 
 a != 0  
-a divides b means b/a no remainder  
-a does not divide b means b/a have remainder
+a divides b means $\frac{b}{a}$ no remainder  
+a does not divide b means $\frac{b}{a}$ have remainder
 
 $$a = d*q+r$$
  a is dividen, d is divisor, q is quotient, r is remainder
@@ -509,209 +510,718 @@ $25\leq\N$
 Ans: $26$
 
 
-# Tutorial 1 
-## q1
-1a. $\displaystyle\sum_{k=1}^5(k+1)$
-1. find num of terms, 
-2. write out first few terms if have many
-3. determine they type of sequence: in ths case: arithmetic
+# Topic 4 : Propositional Logic
 
-1b. $\displaystyle\sum_{j=0}^4(-2)^j$
-1. mind the index
-2. mind lower limit
-3. determine if this is a special sequence
-geometric
+aka Propositional Calculus or Zeroth-Order Logic
 
-1c. $\displaystyle\sum_{i=0}^10-3$
-1. mind the index
-2. mind lower limit
-3. determine if this is a special sequence
-4. in this case is geometric or ????
+dealing with true or false propositions and logical connectives 
+forms compound propositions.
 
-1d. $\displaystyle\sum_{j=0}^8(2^{j+1}-2^j)$
-1. Mind index
-2. mind lower limit
-3. simplify the summation terms in advance: $2*2^j-2^j = $  
-OR  
-break up into sum of 2 summations: $\displaystyle\sum_{j=0}^8(2^{j+1}) - \displaystyle\sum_{j=0}^8(-2^j)$
-4. determine the secial sequence, in this case: geometric
+sentance must be a declaration. Even if declaration is wrong, it is still a proposition.  
+E.g. 2+2 = 3
 
-## q2
-1. generate terms one after another (recursive formula)
-you can determin it is recusive since you see $a_{n-1}$
+sentances that are not declarations cannot be propositions.  
+E.g. How old are you?
 
-## q3
-1. use heeuristic approach (list first few terms) for calculation or verification  
-1 year: $1000 * (1+7\%)^1$  
-2 year: $1000 * (1+7\%)^2$  
-3 year: $1000 * (1+7\%)^3$  
-4 year: $1000 * (1+7\%)^4$
+--------------
 
-Compund interest is a geometric sequence.  
+## Notation
 
-## q4
-Find the sum of the first n terms of an arithmetic series whose first term is 1 and whose common
-difference is 5  
-$a_n = a + (n-1)d$  
-$a_1 = 1$, $d = 5$  
-$S_n = \frac{n(2a + (n-1)d)}{2} = \frac{n(5n-3)}{2}$
+use letters to denote propositional variables or statement variables  
+conventional letters used for propositional variables are $p, q, r, s, ...$
 
-## q5
+⊤ or T: proposition is true, (Known as a “tee”, “downtack”, or “verum” symbol.)
 
-application of general formula and summation equation of arithetic progression
-only need know first term and common difference to determin an arithmetic progression
+⊥ or F: proposition is false, (Known as an “up tack” or “falsum” symbol.)
 
-term 7 = 7,  
-sum of first 10 terms is 60  
-$a_7 = a+6d = 7 $  
-$S_{10} = \frac{10(2a+9d)}{2} = 60$  
-solve the linear equations with two variables, a=3, d=$\frac{2}{3}$
+¬ or -: negation, NOT gate
 
-## q6
-min the number of terms
-find expression for $2(3) +2(3)^2 + ... +2(3)^n$
-is geometric  
-first term a = 2, common ratio r = 3
-total n+1 terms
-$$S_{n+1} = \frac{a(1-r^{n+1})}{1-r} = \frac{2(1-3^{n+1})}{1-3} = 3^{n+1}-1$$
+∧: called "wedge", conjuction, AND gate
 
-$$S_{n+1} = S_n + a_{n+1} = \frac{a(1-r^n)}{1-r} + a_nr$$
+∨: called "vee", disjuction, OR gate
 
-## q7
+⊻ or ⊕: Exclusive disjunction, XOR gate
 
-7a. 
-$\displaystyle\sum_{j=0}^8 3*2^j$
+→ or ⇒: Imply, Material Conditional
 
-$j=0, 3*2^0 = 3$  
-$j=1, 3*2^1 = 6$  
-$j=2, 3*2^2 = 12$  
-actually is geometric prograssion  
-a = 3, r = 2
+⇔: Material Biconditional, NOT XOR gates
 
-7b.
-$\displaystyle\sum_{j=0}^8 (-3^j)$
+Let $p$ and $q$ be propositions.  
+The proposition $q → p$ is the **converse** of $p → q$.  
+The proposition $¬q → ¬p$ is the **contrapositive** of $p → q$.  
+The proposition $¬p → ¬q$ is the **inverse** of $p → q$.  
 
-$j=0, -3^0 = 9$  
-$j=1, 3^1 = -27$  
-$j=2, 3^2 = 81$  
-actually is geometric prograssion  
-a = 3, r = 2
+**Converse** : swap left and right hand sides
+**Contrapositive** : swap left and right hand sides, NOT both sides
+**Inverse** : NOT both sides
 
-7c.
-$\displaystyle\sum_{j=4}^10 (2+3j)$  
-mind lower limit  
-mind number of terms  
-$a_j=2*3j$  
-$a_{j+1}=2*3{j+1}$  
-$a_{j+2}=2*3{j+2}$
+**Precedence of logical connectives**  
+1. Rule 1: The negation operator (¬) is applied before all other logical operators.
+   - So, $¬p ∧ q$ means $¬(p) ∧ q$.  
+2. Rule 2: The conjunction operator (∧) takes precedence over the disjunction operator (∨).
+   - So, $p ∧ q ∨ r$ means $(p ∧ q) ∨ r$, rather than $p ∧ (q ∨ r)$ .  
+3. Rule 3: The material conditional and biconditional operators (→ and ⇔) have lower
+precedence than the conjunction ∧ and disjunction ∨ operators.
+   - So, $p → q ∨ r$ means $p → (q ∨ r)$ 
 
-actually is arithmetic prograssion
+|Connective            |Operator|Precedence|
+|:---------------------|:------:|:--------:|
+|Paranthesis|||
+|Quantifiers|||
+|Negation              |   ¬    |     1    |
+|Conjunction           |   ∧    |     2    |
+|Disjunction           |   ∨    |     3    |
+|Material Conditional  |   →    |     4    |
+|Material Biconditional|   ⇔   |     5    |
 
-## q8
+XOR between 2 and 3, no universal standard  
+if needed in exam, prof will write into the qn when to do XOR
 
-Mind index  
-can directly use summation euation for geometric progression when the number of terms is approching infinity
 
-$a_0 = \frac{1}{2^{2n}} = \frac{1}{2^{2*0}} = 1$
-$a_1 = \frac{1}{2^{2n}} = \frac{1}{2^{2*1}} = \frac{1}{4}$
 
-geometric progression, a = 1, r = $\frac{1}{4}$
+OTHER USEFUL EQUIVALENCES
 
-$$lim_{n->∞} S_n = lim_{n->∞} \frac{a(1-r^n)}{1-r} = lim_{n->∞} \frac{1(1-\frac{1}{4}^n)}{1-\frac{1}{4}} = \frac{4}{3}$$
+- Equivalences involving conditionals:
+- - $$p → q ≡ ¬q → ¬p$$(Proposition–Contrapositive; or Converse–Inverse)
+- - $$p ∨ q ≡ ¬p → q$$
+- - $$p ∧ q ≡ ¬(p → ¬q)$$
+- - $$¬(p → q) ≡ p ∧ ¬q$$
+- Equivalences involving biconditionals:
+- - $$p ⇔ q ≡ (p → q) ∧ (q → p) ≡ ¬p ⇔ ¬q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)$$
+- - $$¬(p ⇔ q) ≡ p ⇔ ¬q ≡ p ⊕ q$$
 
-## example exam qn:  
-$$\displaystyle\sum_{j=0}^8 (3*2^j+(2+3j))$$
-$$\displaystyle\sum_{j=0}^8(3*2^j) + \displaystyle\sum_{j=0}^8(2+3j)$$
+---------------
 
-# Tutorial 2
+## Propositions
 
-first few qn are about modulo ops  
-middle few qn are about prime factorisationn
-last few qn is euclidian and exxtended euclidian
+aka Boolean Statements
 
-## Q1
+proposition is a declarative sentence.
+declares a fact that is either true or false, but not both.
 
-normal long division to find remainder  
-or write out $a=qm+r$ into $r=a\mod{m}$
+--------------
 
-## Q2
+### Negation:
 
-$a≡b\mod{m}$ means
-$a\mod{m} = b\mod{m}$
-$a=qm+r$
-q can be any integer. Thus a can be -42,-15,12,39 or onwards
-since have constraint $0\leq a\leq26$
+Logic gate: NOT
 
-## Q3
+Let $p$ be proposition.  
+The negation of $p$, denoted by $-p$, is the statement that the proposition $p$ is false.  
+read as "not p"
 
-Check remainder of both left and right portions of equation.
-if remainders do not match, then not congruent
+¬: special NOT symbol
 
-## Q4
+be careful when interpreting propositions, dont over interpret
+E.g.  
+p = Vandana’s smartphone does not have at least 32 GB of memory.
+¬p should be: Vandana’s smartphone **does** have at least 32 GB of memory.
+It should not be: Vandana’s smartphone **does** have **more than** 32 GB of memory.
 
-Brute forcce each mod in the bracckets first then add the two remainders  
-OR  
-use modulo arithmetic property (Addition) formula
+------------------
 
-NOTE, following equation is incorrect application of the addition formula:  
-$(-133\mod{23})+(26\mod{23})=(-133+26)\mod{23}$  
+## Connectives
 
-$(-133\mod{23})$, remainder is between 0 and 22  
-$(26\mod{23})$, remainder is between 0 and 22  
-BUT if add both remainders together, may result in value more than 23. so thats why need mod again
+### Conjuction
 
-it should be:  
-$(a+b)\mod{m} = ((a\mod{m})+(b\mod{m}))\mod{m}$
+Logic gate: AND
 
-## Q5
+Let $p$ and $q$ be propositions.  
+The conjunction of $p$ and $q$, denoted by $p ∧ q$, is the proposition “$p$ and $q$”.  
+∧: called "wedge"
 
-Be careful of exponentiation and mutiplication property of modulo arithmetic
+ways to say:
+- and
+- but, e.g. p but not r = p and not r
+- nevertheless e.g. not p nevertheless, r = not p and r
+------------------
 
-## Q6
+### Disjunction
 
-any composite int will have at least 1 prime number divisor that is $\leq \sqrt{n}$
+Logic gate: OR
 
-Can prove if prime by checking if number mod all primes less than $\sqrt{n}$ = 0
+Let $p$ and $q$ be propositions. 
+The disjunction of $p$ and $q$, denoted by $p ∨ q$, is the
+proposition “p or q”.  
+∨: called "vee"
 
-## Q7
+------------------
 
-rather than do normal prime factorisation, you can check for first prime by using the modulo method,  
-e.g. 1001 mod 7 = 0  
-hence, 1001 = 7 * 143  
-then use the modulo method on 143 again to get 11 * 13  
-Thus, 1001 = 7 * 11 * 13  
+### Exclusive Disjunction
 
-May need to prove all nums are prime  
-e.g. 1111 = 11 * 101, need to prove 101 is prime
+Logic gate: XOR
 
-## Q8
+Let $p$ and $q$ be propositions. 
+The disjunction of $p$ and $q$, denoted by $p ⊻ q$ or $p ⊕ q$ or $p ^ q$, is the
+proposition “p exclusive or q”.
 
-find all **factors** (not prime factors) of each number $n$ from 1 to $n$  
-This helps to prove GCD between 2 nums is 1
+------------------
+
+### Material Conditional
+
+Logic gate: IMPLY
+
+Let $p$ and $q$ be propositions.  
+The material conditional or material implication, denoted as "$p → q$" or "$p ⇒ q$", is the proposition “if p, then q” or “p implies q”.  
+
+asserts that $q$ is true on the condition that $p$ holds.
+**Note**: when $p$ is false, then $p → q$ is true, regardless of the truth value of $q$.
+
+if left hand side true (antecident true) but right hand side (consequence false)
+
+| p | q |$p → q$|
+|---|---|-------|
+| F | F |   T   |
+| F | T |   T   |
+| T | F |   F   |
+| T | T |   T   |
+
+The Many ways to say $p → q$:
+- “if $p$, then $q$”;
+- “when/whenever $p$, $q$”;
+- “$p$ implies $q$”;
+- “$p$ only if $q$”;
+- “a sufficient condition for $q$ is $p$”;
+- “$q$ is necessary for $p$”;
+- “a necessary condition for $p$ is $q$”;
+- “$q$ unless not $p$”
+- “unless not $p$, $q$”
+- “$p$ is sufficient for $q$”;
+
+NOT examples on how to say:
+- “$q$ when/whenever $p$”;
+- if $q$, will $p$
+- if $q$, $p$ will happen
+
+Material Conditional example:  
+
+-----------------
+Example 1:  
+Consider the following statement: “If it rains, then I will remain indoors.”  
+If indeed it rains, then you will expect to find me indoors.  
+However, if it does not rain, it does not mean that I have to go outside. I have the option of
+either remaining indoors or going outside, when it does not rain.
+
+***Fr guys, just write out a whole truthtable***
+"Me taking notes is necessary for me to score an A grade in the module."
+Correct ans is :
+$p$ = score an A grade
+$q$ = took notes
+
+"if $p$ then $q$" or "if $p$, it implies $q$"
+
+WRONG ANS  
+if $q$, i will $p$ -----> wrong since you can also score A and not take notes, smarty-pants
+
+Truth Table:  
+
+| got A Grade? | took notes? | if got A grade, implies took notes|
+|:------------:|:-----------:|:----------------------------------------------:|
+|      No      |      No     |Bum never study, maybe which we treat as true   |
+|      No      |     Yes     |L very unfortunate, maybe which we treat as true|
+|      Yes     |      No     |HUH HOW!? this guy cheating fr.  PROVES FALSE   |
+|      Yes     |     Yes     |Proves proposition right, of course True lah    |
+
+---------------------------
+
+Example 2:  
+Consider the conditional statement “If I perform well, I will not get a pay raise”.  
+What are the converse, the contrapositive, and the inverse of this statement?  
+
+Let $p$ be the proposition “I perform well”;  
+Let $q$ be the proposition “I get a pay raise”.  
+Thus $¬q$ is "I do not get a pay raise"
+
+Better to do truth table  
+
+| perform well? | didnt get a raise? |I perform well, I will not get a pay raise|
+|:-------------:|:------------------:|:---------------------------------------:|
+|       No      |         No         | Bum what you expect. Maybe i.e. true|
+|       No      |        Yes         | Maybe you SAF encik and you hit timelimit. Maybe i.e. true|
+|       Yes     |         No         |  OI IN WHAT UNIVERSE!? PLEASE ISEKAI ME THERE   |
+|       Yes     |        Yes         | Proves proposition right, of course True lah|
+
+------------------
+
+### Material Biconditional
+
+Logic Gate: XNOR
+
+Let $p$ and $q$ be propositions.  
+The material biconditional or material bi-implication, denotaed as "$p ⇔ q$" or "$p ↔ q$", is the proposition “$p$ if and only if $q$”.  
+The material biconditional $p ⇔ q$ is true when p and q have the same truth values; and false otherwise.  
+
+Note that $p ⇔ q$ is true when both the material conditionals $p → q$ and $q → p$ are true;
+otherwise, it is false.
+
+Thus, we can say "if and only if" for this connective.  
+Other ways to say:  
+- $p iff q$ (yes it is **iff**, not if)
+- $p$ is a necessary and sufficient condition for $q$
+- $q$ if and only if $p$ 
+
+|$p$|$q$|$p ⇔ q$|
+|---|---|--------|
+| F | F |   T    |
+| F | T |   F    |
+| T | F |   F    |
+| T | T |   T    |
+
+Derivation of truth table above
+| p | q |$p → q$|$q → p$|$(p → q) ∧ (q → p)$|
+|---|---|-------|-------|-------------------|
+| F | F |   T   |   T   |         T         |
+| F | T |   T   |   F   |         F         |
+| T | F |   F   |   T   |         F         |
+| T | T |   T   |   T   |         T         |
+
+-------------
+
+### Converse, Contrapositive, Inverse
+
+Let $p$ and $q$ be propositions.
+The proposition $q → p$ is the **converse** of $p → q$.
+The proposition $¬q → ¬p$ is the **contrapositive** of $p → q$.
+The proposition $¬p → ¬q$ is the **inverse** of $p → q$.
+
+**Converse** : swap left and right hand sides
+**Contrapositive** : swap left and right hand sides, NOT both sides
+**Inverse** : NOT both sides
+
+Note:  
+Only the **contrapositive** has the **same truth table** as $p → q$  
+Truth tables of the **converse** and **inverse** are  the same.
+
+REMINDER: Not all propositions are true. BUT they are still propositions nonetheless
+
+Example:
+
+----------------
+This a bit tricky  
+This is a Material conditional statement  
+Consider the conditional statement “The home team wins whenever it is raining”.  
+What are the converse, the contrapositive, and the inverse of this statement?  
+
+Let $p$ be the proposition “it is raining”;  
+Let $q$ be the proposition “the home team wins”.  
+
+Better to do truth table  
+
+| is raining | home team winning? |The home team wins whenever it is raining|
+|:----------:|:------------------:|:---------------------------------------:|
+|     No     |         No         |Does not prove or disprove this, basically maybe which we treat as true|
+|     No     |        Yes         |Does not prove or disprove this, basically maybe which we treat as true|
+|     Yes    |         No         |  PROVES THIS GUY LYING.  PROVES FALSE   |
+|     Yes    |        Yes         | Proves proposition right, of course True lah|
+
+Converse, $q$ implies $p$,  
+thus, "if $q$ then $p$"
+"if $q$ then $p$" is not same as "if $p$ then $q$"  
+CONVERSE IS **NOT** THE SAME AS ORIGINAL
+
+CONVERSE Truth table  
+"if Home Team Winning, then it is raining"
+| is raining | home team winning? |if Home Team Winning, then it is raining|
+|:----------:|:------------------:|:---------------------------------------:|
+|     No     |         No         |Does not prove or disprove this, basically maybe which we treat as true|
+|     No     |        Yes         |Proved proposition false|
+|     Yes    |         No         |Does not prove or disprove this, basically maybe which we treat as true|
+|     Yes    |        Yes         | Proves proposition right, of course True lah|
+
+Contrapositive, not $q$ implies not $p$,  
+If the home team is not wining, then it is not raining.  
+- Explanation
+- If you see weather is rain, then you know home team win.  
+- If you see home team lose, then you know it wasnt raining  
+CONTRAPOSITIVE **IS** THE SAME AS ORIGINAL
+
+CONTRAPOSITIVE Truth table  
+| is raining | home team winning? |not is raining|not home team winning|If the home team is not wining, then it is not raining|
+|:----------:|:------------------:|:-:|:-:|:---------------------------------------:|
+|     No     |         No         |Yes|Yes|Proved true|
+|     No     |        Yes         |Yes|No |lucky day? maybe|
+|     Yes    |         No         |No |Yes|raining and not winning? Proved false|
+|     Yes    |        Yes         |No |No |doesnt prove this, maybe i.e. true|
+
+Inverse, not $p$ implies not $q$,
+If it is not raining, then the home team does not win.
+INVERSE IS **NOT** THE SAME AS ORIGINAL
+INVERSE IS THE **SAME AS CONVERSE**
+
+INVERSE Truth table  
+| is raining | home team winning? |If it is not raining, then the home team does not win.|
+|:----------:|:------------------:|:---------------------------------------:|
+|     No     |         No         |Proved true|
+|     No     |        Yes         |proved false|
+|     Yes    |         No         |Maybe|
+|     Yes    |        Yes         |Maybe|
+
+--------------
+
+example  
+Classify an arbitrary object.
+if shape is square, then shape is rectangle
+
+let $p$ be "shape is square"  
+let $q$ be "shape is rectangle"
+
+|$p$|$q$|$p → q$|Reason|
+|---|---|-------|------|
+| F | F |   T   |arbitrary shape is neither (maybe)|
+| F | T |   T   |arbitrary shape is rectangle (maybe)|
+| T | F |   F   |arbitrary shape is square and not rectangle (false)|
+| T | T |   T   |arbitrary shape is square and rectangle (always true)|
+
+CONVERSE  
+if shape is rectangle, then shape is square
+|$p$|$q$|$q → p$|Reason|
+|---|---|-------|------|
+| F | F |   T   |arbitrary shape is neither (maybe)|
+| F | T |   F   |arbitrary shape is rectangle but not square (false)|
+| T | F |   T   |true because in this case p is true if q. Since q is F, does not matter what p is|
+| T | T |   T   |arbitrary shape is square and rectangle (always true)|
+
+
+## Precedence of logical connectives
+
+1. Rule 1: The negation operator (¬) is applied before all other logical operators.
+   - So, $¬p ∧ q$
+means $¬(p) ∧ q$.  
+2. Rule 2: The conjunction operator (∧) takes precedence over the disjunction operator (∨).
+   - So, $p ∧ q ∨ r$ means $(p ∧ q) ∨ r$, rather than $p ∧ (q ∨ r)$ .  
+3. Rule 3: The material conditional and biconditional operators (→ and ⇔) have lower
+precedence than the conjunction ∧ and disjunction ∨ operators.
+   - So, $p → q ∨ r$ means $p → (q ∨ r)$ 
+
+|Connective            |Operator|Precedence|
+|:---------------------|:------:|:--------:|
+|Negation              |   ¬    |     1    |
+|Conjunction           |   ∧    |     2    |
+|Disjunction           |   ∨    |     3    |
+|Material Conditional  |   →    |     4    |
+|Material Biconditional|   ⇔   |     5    |
+
+XOR between 2 and 3, no universal standard  
+if needed in exam, prof will write into the qn when to do XOR
+
+## Compound Proposition
+
+compound proposition refers to an expression formed from atomic propositional variables ($p,q,r,s$) using logical connectives (operators).  
+Examples representations:
+
+--------
+$¬r$
+$p ∨ q$
+$p ⇔ q$
+$(p → q) ∧ (r → p)$
+$(r ∧ q) → (r ⊕ p)$
+
+-----------
+Examples:
+
+--------------
+Construct Truth Table for: $(p ∨ ¬q) → (p ∧ q)$
+
+|p|q|¬q|$p ∨ ¬q$|$p ∧ q$|$(p ∨ ¬q) → (p ∧ q)$|
+|-|-|--|--------|-------|--------------------|
+|F|F| T|    T   |   F   |         F          |
+|F|T| F|    F   |   F   |         T          |
+|T|F| T|    T   |   F   |         F          |
+|T|T| F|    T   |   T   |         T          |
+
+## Logical equivelence
+
+Compound propositions $P$ and $Q$ are logically equivalent if $P ⇔ Q$ is a tautology (Has identical truth table).  
+The notation $P ≡ Q$ denotes that $P$ and $Q$ are logically equivalent.
+
+Example  
+
+--------------
+De Morgan laws
+Show $¬(p ∧ q) ≡ ¬p ∨ ¬q$ (law 1)
+|$p$|$q$|$p ∧ q$|$¬(p ∧ q)$|$¬p$|$¬q$|$¬p ∨ ¬q$|
+|---|---|-------|----------|----|----|---------|
+| F | F |   F   |    T     |  T |  T |    T    |
+| F | T |   F   |    T     |  T |  F |    T    |
+| T | F |   F   |    T     |  F |  T |    T    |
+| T | T |   T   |    F     |  F |  F |    F    |
+
+Show $¬(p ∨ q) ≡ ¬p ∧ ¬q$ (law 2)
+|$p$|$q$|$p ∨ q$|$¬(p ∨ q)$|$¬p$|$¬q$|$¬p ∧ ¬q$|
+|---|---|-------|----------|----|----|---------|
+| F | F |   F   |    T     |  T |  T |    T    |
+| F | T |   T   |    F     |  T |  F |    F    |
+| T | F |   T   |    F     |  F |  T |    F    |
+| T | T |   F   |    T     |  F |  F |    F    |
+
+-----------
+
+is $p → q ≡ ¬p ∨ q$?
+
+|$p$|$q$|$¬p$|$p → q$|$¬p ∨ q$|
+|---|---|----|-------|--------|
+| F | F |  T |   T   |   T    |
+| F | T |  T |   T   |   T    |
+| T | F |  F |   F   |   F    |
+| T | T |  F |   T   |   T    |
+
+ans: yes since truth tables identical
+
+-------------------
+
+OTHER USEFUL EQUIVALENCES
+
+- Equivalences involving conditionals:
+- - $$p → q ≡ ¬q → ¬p$$ -(Proposition–Contrapositive; or Converse–Inverse)
+- - $$p ∨ q ≡ ¬p → q$$
+- - $$p ∧ q ≡ ¬(p → ¬q)$$
+- - $$¬(p → q) ≡ p ∧ ¬q$$
+- Equivalences involving biconditionals:
+- - $$p ⇔ q ≡ (p → q) ∧ (q → p) ≡ ¬p ⇔ ¬q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)$$
+- - $$¬(p ⇔ q) ≡ p ⇔ ¬q ≡ p ⊕ q$$
+
+## Tautology, Contradiction, Contingency, Satifiability
+
+### Tautology
+
+A compound proposition that is always true, no matter what the truth values of its
+propositional variables, is **called a tautology**.
+
+**Always true for all inputs**
+
+-------
+
+### Contradiction
+
+A compound proposition that is always false is called a contradiction.
+
+**Always false for all inputs**
+
+--------
+
+### Contingency
+
+A compound proposition that is neither a tautology nor a contradiction is called a
+contingency.
+
+**True for some inputs, False for other inputs**
+
+--------
+
+### Satifiability
+
+A proposition is satisfiable if it is **true under some assignment of values** to its propositional variables.
+
+Satisfied = Value is true (wether through combination of inputs or tautology)
+Satisfiable = Value can be made to be true through combination of inputs
+
+Tautologies are satisfiable.
+- always satisfied.
+- i.e always true for any assignment of values to input.
+
+Contradictions are unsatisfiable.
+- never satisfied.
+- i.e. always false for any assignment of values to input.
+
+Contingencies are satisfiable.
+- can be either satisfied or not satisfied.
+- i.e. either true or false depending on input.
+- satisfied by some input, unsatisfied by others.
+- *Note that contingencies, by definition, are neither tautologies nor contradictions.
+
+
+Example
+
+--------
+
+𝑝 ∨ ¬𝑝 is a tautology.  
+𝑝 ∧ ¬𝑝 is a contradiction.
+
+---------
+
+# Topic 5: Predicate Logic
+
+Predicate Logic: enables concise and general expressions
+
+Statements with variables may not be able to become a proposition.
+e.g. $x>4$ or $x=y+3$ or "Every student in my class had submitted at least one assignmnet"
+
+"Every student in my class had submitted at least one assignmnet"  
+This sentance requires one proposition per student  
+However, can say $P(x) =$ x has submitted an assignment
+
+the subject: x  
+the predicate (a property of x): had submitted an assignment
+
+The predicate now represents the whole student set
+
+once $x$ has a value, then can get a truth value
+
+## Predicate / Propositional Fucntion
+
+$$S(x): x\ is\ a\ student$$
+
+x is the variable, represent objs from a group/set
+
+S is a predicate, a property that is applied to x
+
+S() is a propositional function, applying the predicate to the variable, itself is NOT a propositions
+
+e.g. of usage  
+S(Alice): Alice is a student, aka True
+S(Abhishek): Ahbishek is NOT a student, aka False
+
+variables come from a domain, likE a type in programming
+e.g. All positive integers, all students in a class
+
+Consider:  
+"All students are hardworking"  
+"Alice is a student"
+Does it follow that: "Alice is hard-working"?
+
+## Quantifiers
+
+Quantifiers in Predicate logic
+1. Universal Quantifier, $∀$
+   - Truth Value using domain
+   - Truth value using counter example
+2. Existential Quantifier
+   - Truth value using domain
+
+Quantifier with restricted domain
+Precedence of Quantifier
+Negatin Quantified Expressions
+Nested Quantifiers
+   - Quantification of two variables
+
+### Universal Quantifier, $∀$
+
+$$∀x\ P(x)$$
+$$∀x\ P(x) = P(x_1) ∧ P(x_2) ∧ P(x_3) {...}$$
+
+read as "For all $x$, $P(x)$" or "For every $x$ , $P(x)$" or "Every x in [domain] [predicate]"
 
 e.g.  
-15: 1,3,5,15  
-11: 1,11  
-19: 1,19
+Every student in your class has taken a course in python  
+Every x in set of positive integers fulfills x > 0
 
-## Q9
+assert property is true for all values of x in particular domain (called domain of discourse / universe of discourse)
 
-remember, GCD is min power of **common** prime factors  
+The Universal quantification of $P(x)$ for a particular domain is the proposition that asserts that $P(x)$ is true for all values of x in this domain.  
+**BUT $∀x\ P(x)$ is NOT a proposition, it is a quantifier. BUT the quantifier can have a truth value**  
+can be thought of as a conjunction of all values of x. I.e
 
-if number has no prime facctor, can do power 0 to represent easier  
-e.g.  
-$(3^5 * 5^5)=(2^0 * 3^5 * 5^5)$
+$$∀x\ P(x) = P(1) ∧ P(2) ∧ P(3)$$
 
-## Q10
+If one value of P(x) is false, then $∀x\ P(x)$ will be false  
 
-Prime factorise both numbers  
-find gcd and lcm.  
-prove with basic math that $gcd(a,b) * lcm(a,b) = ab$
+truth value of $∀x\ P(x)$ will change when the domain changes.  
+Thus, domain must be specified when universal quantifier is used, otherwise universal quantifier is not defined
 
-## Q11
+![predicate-logic-domains](jacob-images/predicate-logic-domains.png)
 
-normal euclidian algo, just practice application
+### Universal Quantifier, Counter examples
 
-## Q12
+A statement $∀x\ P(x)$ is false, where $P(x)$ is a propositional function, if and only if $P(x)$ is not always true when $x$ is in the domain
 
-when applying extended euclidian, be careful when simplifying and when making remainder the subject of the equation
+$$∀x\ P(x) ↔ P(x)\ for\ all\ x$$
+
+### Existential Quantifier, $∃$
+
+$$∃x\ P(x)$$
+$$∃x\ P(x) = P(x_1) ∨ P(x_2) ∨ P(x_3) {...}$$
+
+read as "There exists an $x$, such that $P(x)$" or "For some $x$, $P(x)$"  
+
+**Same as $∀x\ P(x)$, $∃x\ P(x)$ is NOT a proposition, it is a quantifier. BUT the quantifier can have a truth value**  
+"There exists an element $x$ in the domain, such that $P(x)$ 
+
+truth value of $∃x\ P(x)$ will change when the domain changes.  
+Thus, domain must be specified when Existential quantifier is used, otherwise Existential quantifier is not defined
+
+
+## Quantifiers, Restricted Domains
+
+in the domain of all real numbers
+$$∀x < 0\ (x^2 > 0)$$
+$$∀y \neq 0\ (y^3 \neq 0)$$
+$$∃z > 0\ (z^2 = 2)$$
+
+in $∀x < 0\ (x^2 > 0)$, the domain is all real numbers where $x < 0$ and the predicate is $(x^2 > 0)$
+
+every non-zero real number y, y^3 is also a non-zero number
+
+there exists a positive real number z such that z^2 = 2
+
+## Logical Precedence of Quantifiers
+
+Both quantifiers have higher precedence than all logical operators  
+$$∀x P(x) ∨ Q(x)\ !\equiv ∀x (P(x) ∨ Q(x))$$
+$$∀x P(x) ∨ Q(x)\ \equiv (∀x P(x)) ∨ Q(x)$$
+
+## Negating Quantified Expressions
+
+$$¬∀x\ P(x) \equiv ∃x(¬P(x))$$
+$$¬∃x\ P(x) \equiv ∀x(¬P(x))$$
+
+E.g.  
+"Every student in your class has taken a course in Python."  
+P(x) = x has taken a course in Python  
+Domain = students in your class
+$∀x\ P(x)$
+Negate statement = $¬∀x\ P(x)$  
+"NOT Every student in your class has taken a course in Python."  
+AKA
+"There is a student in your class who has not taken a course in Python"  
+$∃x(¬P(x))$
+
+
+"There is a student in your class who has taken a course in Python."  
+P(x) = x has taken a course in Python  
+Domain = students in your class
+$∃x\ P(x)$
+Negate statement = $¬∃x\ P(x)$  
+"There is NOT student in your class who has taken a course in Python."  
+AKA
+"Every student in your class has NOT taken a course in Python"  
+$∀x(¬P(x))$
+
+$$¬∀x(x^2 > x) \equiv ∃x(x^2 \leq x)$$
+$$¬∃x(x^2=2) \equiv ∀x(x^2 \neq 2)$$
+
+## Nested Quantifiers
+
+![table-of-nested-quatifiers](jacob-images/table-of-nested-quatifiers.png)
+
+
+q1. domain is real numbers
+$$∀x∃y(x + y = 0)$$
+$$\equiv ∀x Q(x), Q(x) = ∃y(x + y = 0)$$
+
+read as "for every real number x, thereis a real number y such that $x + y = 0$"  
+i.e. for every real number x, there is an real number y that is the addative inverse of x
+
+q2. domain is real numbers
+$$∀x∀y(x + y = y + x)$$
+
+read as "x + y = y + x, for all x and y real numbers"
+
+q3. domain is real numbers
+$$∀x∀y((x > 0) ∧ (y < 0) → (xy < 0))$$
+
+read as "for every real number x and for every real number y, if $x > 0$ and $y < 0$, then $xy < 0$
+
+q4.
+let $Q(x,y)$ denote '$x + y = 0$'  
+What are the truth values of the following:
+$$∃y∀xQ(x,y)$$
+$$∀x∃yQ(x,y)$$
+
+$∃y∀xQ(x,y)$ = $∃y(∀xQ(x,y))$ = There is a real number $y$ such that for every real number $x$, $x + y = 0$.  
+Cannot be true as there is no singular real number $y$ such that $x + y = 0$ every real number $x$
+
+$∀x∃yQ(x,y)$ = $∀x(∃yQ(x,y))$ = For every real number $x$, there is a real number $y$ such that , $x + y = 0$.  
+Can be true as tor a given real number $x$, we can choose a real number $y$ such that $x + y = 0$
+
+
+-----------------------------------------------------------------
+
