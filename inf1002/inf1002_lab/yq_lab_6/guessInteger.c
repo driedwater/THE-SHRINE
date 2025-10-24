@@ -64,6 +64,7 @@ int main()
     int player2_guess;
     int player2_num_guess = MAX_GUESS;
 
+    // Allow player 1 to set number for player 2 to guess
     while (true) {
         printf("Player 1, enter a number between 1 and 1000:\n");
         scanf("%d", &player1);
@@ -75,6 +76,7 @@ int main()
         break;
     }
 
+    // Allow player 2 to guess player 1 number
     while (true) {
         if (player2_num_guess == 0) {
             printf("Player 1 wins.");
